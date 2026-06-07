@@ -1,7 +1,6 @@
 # rcfg-sim documentation
 
 [![Build](https://github.com/rconfig/rconfig-sim-docs/actions/workflows/build.yml/badge.svg)](https://github.com/rconfig/rconfig-sim-docs/actions/workflows/build.yml)
-[![Deploy](https://github.com/rconfig/rconfig-sim-docs/actions/workflows/deploy.yml/badge.svg)](https://github.com/rconfig/rconfig-sim-docs/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 [![Built with Claude](https://img.shields.io/badge/Built%20with-Claude-D97757?logo=anthropic&logoColor=white)](https://claude.com/claude-code)
@@ -68,18 +67,22 @@ Environment variables (all optional):
 
 ## Deployment
 
-Hosted on Cloudflare Workers static assets ([`wrangler.jsonc`](wrangler.jsonc)). Deploys run
-automatically via GitHub Actions ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)):
+Hosted on Cloudflare Workers static assets ([`wrangler.jsonc`](wrangler.jsonc)) via
+**Cloudflare Workers Builds** — Cloudflare builds and deploys directly from the connected Git
+repo on every push to the production branch. Settings:
 
-| Branch | Builds with | Deploys to |
-|---|---|---|
-| `main` | `PUBLIC_SITE_URL=https://simdocs.rconfig.com` | production (`simdocs.rconfig.com`) |
-| `development` | `PUBLIC_SITE_URL=https://simdocs.dev.rconfig.com` | dev (`simdocs.dev.rconfig.com`, `noindex`) |
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Production branch | `main` |
+| Node version | 20 (from `.nvmrc`) |
 
-CI requires two repository secrets: `CLOUDFLARE_API_TOKEN` (scoped to *Workers Scripts: Edit*)
-and `CLOUDFLARE_ACCOUNT_ID`. Optionally set a `PUBLIC_GTM_CONTAINER_ID` repository variable.
+Optional build environment variables: `PUBLIC_SITE_URL` (defaults to the production URL) and
+`PUBLIC_GTM_CONTAINER_ID` (analytics; off when unset). No API tokens are required — the Git
+connection authorizes deploys.
 
-Manual deploy:
+Manual deploy (from a local checkout):
 
 ```bash
 # production
