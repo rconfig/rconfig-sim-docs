@@ -35,11 +35,11 @@ const buildCsp = (upgradeInsecure) =>
 		"object-src 'none'",
 		"form-action 'self'",
 		analyticsEnabled
-			? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com"
-			: "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com",
+			? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com https://analytics.ahrefs.com"
+			: "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com https://analytics.ahrefs.com",
 		analyticsEnabled
-			? "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com"
-			: "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com",
+			? "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com https://analytics.ahrefs.com"
+			: "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://analytics.ahrefs.com",
 		"img-src 'self' https: data: blob:",
 		"style-src 'self' 'unsafe-inline'",
 		"font-src 'self' https: data:",
@@ -64,6 +64,19 @@ const buildHeadTags = (upgradeInsecure) => [
 	{ tag: "meta", attrs: { property: "og:image:height", content: "640" } },
 	{ tag: "meta", attrs: { name: "twitter:card", content: "summary_large_image" } },
 	{ tag: "meta", attrs: { name: "twitter:image", content: `${siteUrl}/og.png` } },
+	// Ahrefs Web Analytics — production host only (keeps the noindex dev host out of stats).
+	...(isProd
+		? [
+				{
+					tag: "script",
+					attrs: {
+						src: "https://analytics.ahrefs.com/analytics.js",
+						"data-key": "/19fCWTCKelr3HxkT6v8uQ",
+						async: true,
+					},
+				},
+			]
+		: []),
 	// Discoverability for search engines (prod only).
 	...(isProd
 		? [
