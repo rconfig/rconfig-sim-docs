@@ -45,21 +45,69 @@ device returns a `COMPLD` block and unlocks the `RTRV-*` verbs.
 | `RTRV-ACTIVE-USER` | The active user session |
 | `RTRV-SW-VER` | Software version |
 | `RTRV-SYS` | System identity (SID, type, shelf serial) |
+| `RTRV-NBR` | Lists the Remote NEs reachable through a Gateway NE — see [GNE / RNE](#gateway-and-remote-nes-gne--rne) |
 
 Any other verb after login returns `DENY` with `ICNV` (input, command not valid). The exact
 TL1 block formatting (`COMPLD`/`DENY` headers, the SID and timestamp) is produced by the
 driver; unlike Cisco output, the TL1 wire bytes are not hashed by a determinism test.
 
+## Gateway and Remote NEs (GNE / RNE)
+
+Real optical networks are reached through a **Gateway NE (GNE)** — the node you SSH into —
+which fronts several **Remote NEs (RNEs)** that have no direct management access of their own.
+You address an RNE by putting its **TID** (target identifier) in the command's TID field; the
+GNE routes the command across its control network to that RNE and returns the reply with the
+RNE's TID as the response SID.
+
+The same `ciena_tl1` driver handles both. Whether a device has RNEs depends only on which
+generator model produced it:
+
+| Model | Topology |
+|---|---|
+| `ciena-6500-tl1` | Standalone node (a GNE with no RNEs) |
+| `ciena-6500-tl1-gne` | Gateway NE fronting 2–5 RNEs, whose inventories are generated into the device's config |
+
+After login, `RTRV-NBR` lists the RNEs reachable through the GNE:
+
+```text
+RTRV-NBR:ALL:2;
+
+   CIENA-LAX-1001 26-06-07 11:42:13
+M  2 COMPLD
+   "RNE-LIMERICK:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+   "RNE-GALWAY:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+;
+```
+
+You then address any RNE by TID. The same verb set works locally or against an RNE:
+
+| Form | Target | Example |
+|---|---|---|
+| `VERB::AID:CTAG;` (empty TID) | the GNE itself | `RTRV-EQPT::ALL:100;` |
+| `VERB:TID:CTAG;` (TID set) | the named RNE | `RTRV-EQPT:RNE-LIMERICK:3;` |
+
+A TID that is empty, `ALL`, or the GNE's own SID is treated as **local**; an unknown or
+unreachable RNE TID returns `DENY` with `IIAC` (invalid access identifier). Both the
+TID-addressed short form `VERB:TID:CTAG;` and the strict `VERB::AID:CTAG;` form are accepted.
+The standalone model answers `RTRV-NBR` with an empty list and returns `IIAC` for any RNE TID.
+
+GNE devices stream the targeted RNE's inventory
+[zero-copy from `mmap`](/getting-started/concepts/#zero-copy-config-delivery) just like a
+local `RTRV-EQPT`; the smaller per-RNE responses (alarms, conditions, sys, version) are
+synthesized with the RNE's TID as the SID.
+
 ## Generating Ciena devices
 
-Add the [`ciena-6500-tl1`](/generating-configs/size-buckets/) model to your distribution:
+Add a Ciena model to your distribution — `ciena-6500-tl1` for standalone nodes,
+`ciena-6500-tl1-gne` for Gateway NEs with RNEs behind them:
 
 ```bash
---distribution "sm:40,md:40,lg:10,ciena-6500-tl1:10"
+--distribution "sm:40,md:40,lg:10,ciena-6500-tl1:5,ciena-6500-tl1-gne:5"
 ```
 
 The generator writes these rows with `vendor=Ciena` and `template=ciena_tl1` in the
-[manifest](/generating-configs/manifest/), and the server selects this driver for them.
+[manifest](/generating-configs/manifest/), and the server selects this driver for them. RNEs
+are not separate manifest rows — they are reached only through their GNE.
 
 ## SSH authentication
 
@@ -70,7 +118,8 @@ platform does. This is the mode to use for realistic mixed Cisco + Ciena fleets.
 
 ## Metrics
 
-The driver emits `CmdTL1ActUser`, `CmdTL1RtrvEqpt`, `CmdTL1RtrvAlmAll`, `CmdTL1Deny`, and the
-other `CmdTL1*` values on `rcfgsim_command_duration_seconds`. These appear once the driver is
-active (they are not part of the pre-registered Cisco label set). See the
-[metrics reference](/metrics/reference/).
+The driver emits `CmdTL1ActUser`, `CmdTL1RtrvEqpt`, `CmdTL1RtrvAlmAll`, `CmdTL1RtrvNbr`,
+`CmdTL1Deny`, and the other `CmdTL1*` values on `rcfgsim_command_duration_seconds`. These
+appear once the driver is active (they are not part of the pre-registered Cisco label set).
+The TID a command targets is **not** a label — RNE addressing does not expand metric
+cardinality. See the [metrics reference](/metrics/reference/).

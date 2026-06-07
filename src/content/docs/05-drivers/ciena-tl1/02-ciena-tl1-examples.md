@@ -177,6 +177,89 @@ M  CTAG009 DENY
 
 Bad credentials on `ACT-USER` return `DENY PLNA`, exactly like a pre-login retrieval.
 
+## Gateway NE fronting Remote NEs (GNE / RNE)
+
+The [`ciena-6500-tl1-gne`](/drivers/ciena-tl1/#gateway-and-remote-nes-gne--rne) model
+emulates a **Gateway NE** that proxies TL1 to several **Remote NEs** reachable only through
+it. Generate a small GNE fleet and serve it:
+
+```bash
+# A GNE fleet — each device fronts 2–5 RNEs
+./bin/rcfg-sim-gen --count 5 --output-dir /tmp/gne/configs \
+  --manifest /tmp/gne/manifest.csv --ip-base 127.0.0.1 --ip-count 1 \
+  --port-start 12000 --devices-per-ip 5 --seed 7 \
+  --distribution "ciena-6500-tl1-gne:100"
+
+./bin/rcfg-sim --listen-ip 127.0.0.1 --port-start 12000 --port-count 5 \
+  --manifest /tmp/gne/manifest.csv --host-key /tmp/gne/hostkey --ssh-auth none
+```
+
+Connect to the GNE and log in, then **discover the RNEs** behind it with `RTRV-NBR`:
+
+```text
+ACT-USER::admin:1::admin;
+RTRV-NBR:ALL:2;
+
+   CIENA-LAX-1001 26-06-07 11:43:01
+M  2 COMPLD
+   "RNE-LIMERICK:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+   "RNE-GALWAY:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+;
+```
+
+Address an RNE by putting its TID in the TID field (`VERB:TID:CTAG;`). The reply comes back
+with the **RNE's** TID as the response SID — note `RNE-LIMERICK`, not the GNE's `CIENA-LAX-1001`:
+
+```text
+RTRV-EQPT:RNE-LIMERICK:3;
+
+   RNE-LIMERICK 26-06-07 11:43:08
+M  3 COMPLD
+   "SHELF-1::PROVISIONED,TYPE=6500-7SLOT,SN=LBC2K9F4P1,SWVER=12.4,IP=127.0.0.1:IS-NR"
+   "SLOT-1:OTR2,CLEI=WMOTH4K2NP,SN=LBC2K9F4P101,PN=NTK547C:IS-NR"
+   ...
+;
+```
+
+Alarms (and the other verbs) work against an RNE the same way:
+
+```text
+RTRV-ALM-ALL:RNE-LIMERICK:4;
+
+   RNE-LIMERICK 26-06-07 11:43:12
+M  4 COMPLD
+   "SLOT-2:MN,CONTBUS,SA,,,,:\"Intermittent equipment communication\""
+;
+```
+
+GNE-own commands keep the empty-TID form and report the GNE's SID:
+
+```text
+RTRV-EQPT::ALL:100;
+
+   CIENA-LAX-1001 26-06-07 11:43:18
+M  100 COMPLD
+   "SHELF-1::PROVISIONED,TYPE=6500-7SLOT,...:IS-NR"
+;
+```
+
+An unknown or unreachable RNE TID is denied with `IIAC`:
+
+```text
+RTRV-EQPT:RNE-NOWHERE:9;
+
+   CIENA-LAX-1001 26-06-07 11:43:22
+M  9 DENY
+   IIAC
+;
+```
+
+:::tip[Collecting a whole GNE subtree]
+A collector walks a GNE by issuing `RTRV-NBR` first, then iterating each returned RNE TID with
+`RTRV-EQPT:<TID>:<ctag>;`. The standalone `ciena-6500-tl1` model behaves like a GNE with zero
+RNEs — `RTRV-NBR` returns an empty `COMPLD` — so the same collection logic works for both.
+:::
+
 ## Automation
 
 ### Python — Paramiko (read until `;`)
@@ -212,6 +295,23 @@ print(tl1(chan, "ACT-USER::admin:C1::admin;"))
 print(tl1(chan, "RTRV-EQPT::ALL:C2;"))
 print(tl1(chan, "RTRV-ALM-ALL:::C3;"))
 client.close()
+```
+
+### Python — walk a GNE's RNEs
+
+Discover the RNEs with `RTRV-NBR`, then pull each one's inventory by TID. Reuses the `tl1()`
+helper above:
+
+```python
+import re
+
+tl1(chan, "ACT-USER::admin:1::admin;")
+nbr = tl1(chan, "RTRV-NBR:ALL:2;")
+rnes = re.findall(r'"(RNE-[A-Z0-9-]+):', nbr)   # ['RNE-LIMERICK', 'RNE-GALWAY', ...]
+
+inventories = {"<local>": tl1(chan, "RTRV-EQPT::ALL:100;")}   # the GNE itself
+for i, tid in enumerate(rnes, start=10):
+    inventories[tid] = tl1(chan, f"RTRV-EQPT:{tid}:{i};")     # each RNE behind it
 ```
 
 ### Bash (one-shot)
