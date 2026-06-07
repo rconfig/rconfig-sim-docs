@@ -156,6 +156,7 @@ export default defineConfig({
 			logo: {
 				light: "./src/assets/sim-logo-gradient.svg",
 				dark: "./src/assets/sim-logo-white.svg",
+				alt: "Sim by rConfig",
 				replacesTitle: true,
 			},
 			social: [
