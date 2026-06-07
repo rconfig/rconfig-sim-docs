@@ -1,65 +1,146 @@
 [
-	{
-		"label": "Getting Started",
-		"collapsed": false,
-		"autogenerate": { "directory": "01-getting-started" }
-	},
-	{
-		"label": "Installation",
-		"collapsed": true,
-		"autogenerate": { "directory": "02-installation" }
-	},
-	{
-		"label": "Generating Configs",
-		"collapsed": true,
-		"autogenerate": { "directory": "03-generating-configs" }
-	},
-	{
-		"label": "Running the Server",
-		"collapsed": true,
-		"autogenerate": { "directory": "04-running-server" }
-	},
-	{
-		"label": "Drivers & Vendors",
-		"collapsed": true,
-		"items": [
-			{ "slug": "drivers/overview" },
-			{
-				"label": "Cisco IOS",
-				"collapsed": true,
-				"items": [{ "slug": "drivers/cisco-ios" }, { "slug": "drivers/cisco-ios-examples" }]
-			},
-			{
-				"label": "Ciena 6500 TL1",
-				"collapsed": true,
-				"items": [{ "slug": "drivers/ciena-tl1" }, { "slug": "drivers/ciena-tl1-examples" }]
-			},
-			{ "slug": "drivers/writing-a-driver" }
-		]
-	},
-	{
-		"label": "Fault Injection",
-		"collapsed": true,
-		"autogenerate": { "directory": "06-faults" }
-	},
-	{
-		"label": "Metrics & Observability",
-		"collapsed": true,
-		"autogenerate": { "directory": "07-metrics" }
-	},
-	{
-		"label": "Examples & Scenarios",
-		"collapsed": true,
-		"autogenerate": { "directory": "08-examples" }
-	},
-	{
-		"label": "Reference",
-		"collapsed": true,
-		"autogenerate": { "directory": "09-reference" }
-	},
-	{
-		"label": "Contributing",
-		"collapsed": true,
-		"autogenerate": { "directory": "10-contributing" }
-	}
+    {
+        "label": "Getting Started",
+        "collapsed": false,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "01-getting-started",
+                    "collapsed": false
+                }
+            }
+        ]
+    },
+    {
+        "label": "Installation",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "02-installation",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Generating Configs",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "03-generating-configs",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Running the Server",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "04-running-server",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Drivers & Vendors",
+        "collapsed": true,
+        "items": [
+            {
+                "slug": "drivers/overview"
+            },
+            {
+                "label": "Cisco IOS",
+                "collapsed": true,
+                "items": [
+                    {
+                        "slug": "drivers/cisco-ios"
+                    },
+                    {
+                        "slug": "drivers/cisco-ios-examples"
+                    }
+                ]
+            },
+            {
+                "label": "Ciena 6500 TL1",
+                "collapsed": true,
+                "items": [
+                    {
+                        "slug": "drivers/ciena-tl1"
+                    },
+                    {
+                        "slug": "drivers/ciena-tl1-examples"
+                    }
+                ]
+            },
+            {
+                "slug": "drivers/writing-a-driver"
+            }
+        ]
+    },
+    {
+        "label": "Fault Injection",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "06-faults",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Metrics & Observability",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "07-metrics",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Examples & Scenarios",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "08-examples",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Reference",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "09-reference",
+                    "collapsed": true
+                }
+            }
+        ]
+    },
+    {
+        "label": "Contributing",
+        "collapsed": true,
+        "items": [
+            {
+                "autogenerate": {
+                    "directory": "10-contributing",
+                    "collapsed": true
+                }
+            }
+        ]
+    }
 ]

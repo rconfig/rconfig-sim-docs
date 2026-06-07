@@ -1,7 +1,38 @@
-/*@tailwind base; */
-@import 'tailwindcss/utilities' layer(utilities);
+@layer base, starlight, theme, components, utilities;
 
-*, *::before, *::after {
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-accent-50: var(--color-indigo-50);
+  --color-accent-100: var(--color-indigo-100);
+  --color-accent-200: var(--color-indigo-200);
+  --color-accent-300: var(--color-indigo-300);
+  --color-accent-400: var(--color-indigo-400);
+  --color-accent-500: var(--color-indigo-500);
+  --color-accent-600: var(--color-indigo-600);
+  --color-accent-700: var(--color-indigo-700);
+  --color-accent-800: var(--color-indigo-800);
+  --color-accent-900: var(--color-indigo-900);
+  --color-accent-950: var(--color-indigo-950);
+
+  --color-gray-50: var(--color-zinc-50);
+  --color-gray-100: var(--color-zinc-100);
+  --color-gray-200: var(--color-zinc-200);
+  --color-gray-300: var(--color-zinc-300);
+  --color-gray-400: var(--color-zinc-400);
+  --color-gray-500: var(--color-zinc-500);
+  --color-gray-600: var(--color-zinc-600);
+  --color-gray-700: var(--color-zinc-700);
+  --color-gray-800: var(--color-zinc-800);
+  --color-gray-900: var(--color-zinc-900);
+  --color-gray-950: var(--color-zinc-950);
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -31,28 +62,28 @@
   display: none !important;
 }
 
-:root[data-theme='dark'] {
+:root[data-theme="dark"] {
   --sl-color-bg: #1b1d21;
   --sl-color-bg-nav: #24262a;
   --sl-color-bg-sidebar: #24262a;
   --sl-color-bg-inline-code: #18181b;
 }
 
-:root[data-theme='dark'] code:not(pre code) {
+:root[data-theme="dark"] code:not(pre code) {
   background-color: #3f3f46 !important;
   color: #e2e8f0 !important; /* Light gray text */
   padding: 0.125rem 0.25rem !important;
   border-radius: 0.25rem !important;
-  font-size: .8125rem !important;
+  font-size: 0.8125rem !important;
 }
 
 /* Also fix it for light theme to ensure consistency */
-:root[data-theme='light'] code:not(pre code) {
+:root[data-theme="light"] code:not(pre code) {
   background-color: #e4e4e7 !important;
   color: #334155 !important;
   padding: 0.125rem 0.25rem !important;
   border-radius: 0.25rem !important;
-  font-size: .8125rem !important;
+  font-size: 0.8125rem !important;
 }
 
 /* Ensure it works regardless of theme detection */
@@ -61,5 +92,5 @@ code:not(pre code) {
   color: var(--sl-color-text) !important;
   padding: 0.125rem 0.25rem !important;
   border-radius: 0.25rem !important;
-  font-size: .8125rem !important;
+  font-size: 0.8125rem !important;
 }
