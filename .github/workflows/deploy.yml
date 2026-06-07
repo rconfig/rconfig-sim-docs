@@ -1,0 +1,52 @@
+name: deploy
+
+# Build and deploy to Cloudflare Workers.
+#   push to main        → production (simdocs.rconfig.com)
+#   push to development  → dev (simdocs.dev.rconfig.com, built noindex)
+on:
+  push:
+    branches: [main, development]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build (production)
+        if: github.ref == 'refs/heads/main'
+        run: npm run build
+        env:
+          PUBLIC_SITE_URL: https://simdocs.rconfig.com
+          PUBLIC_GTM_CONTAINER_ID: ${{ vars.PUBLIC_GTM_CONTAINER_ID }}
+
+      - name: Build (dev)
+        if: github.ref == 'refs/heads/development'
+        run: npm run build
+        env:
+          PUBLIC_SITE_URL: https://simdocs.dev.rconfig.com
+
+      - name: Deploy (production)
+        if: github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Deploy (dev)
+        if: github.ref == 'refs/heads/development'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --env dev

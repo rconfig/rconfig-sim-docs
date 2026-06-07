@@ -1,0 +1,16 @@
+/* Target the first h1#_top that's NOT in the hero section */
+h1#_top:not([data-page-title]) {
+    display: none;
+}
+
+/* Hide container with h1#_top that doesn't have data-page-title attribute */
+.content-panel:has(h1#_top:not([data-page-title])) {
+    display: none;
+}
+
+/* The header shows the "Sim by rConfig" image logo (logo.replacesTitle), so the
+   text site title is not rendered. Constrain the logo to a sensible header size. */
+.site-title img {
+    height: 2rem;
+    width: auto;
+}

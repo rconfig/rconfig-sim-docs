@@ -1,0 +1,50 @@
+---
+import Default from "@astrojs/starlight/components/Footer.astro";
+---
+
+{/* Default Starlight footer (prev/next nav, edit link, last-updated). */}
+<Default><slot /></Default>
+
+{/* rConfig family links. rcfg-sim is a standalone open-source test tool maintained
+    by the rConfig team; these point to the separate product and documentation
+    properties. Kept descriptive and topical so they reinforce that rcfg-sim (a
+    simulator) and rConfig (the NCM platform) are distinct. */}
+<footer class="rcfg-family">
+	<p class="rcfg-family__label">Part of the rConfig family</p>
+	<ul class="rcfg-family__links">
+		<li><a href="https://www.rconfig.com" rel="noopener">rConfig — network configuration management</a></li>
+		<li><a href="https://docs.rconfig.com" rel="noopener">rConfig documentation</a></li>
+		<li><a href="https://v8coredocs.rconfig.com" rel="noopener">rConfig V8 core developer docs</a></li>
+		<li><a href="https://github.com/rconfig/rconfig-sim" rel="noopener">rcfg-sim on GitHub</a></li>
+	</ul>
+</footer>
+
+<style>
+	.rcfg-family {
+		margin-top: 2rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--sl-color-gray-5);
+		font-size: var(--sl-text-sm);
+	}
+	.rcfg-family__label {
+		margin: 0 0 0.5rem;
+		font-weight: 600;
+		color: var(--sl-color-white);
+	}
+	.rcfg-family__links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem 1.25rem;
+	}
+	.rcfg-family__links a {
+		color: var(--sl-color-gray-2);
+		text-decoration: none;
+	}
+	.rcfg-family__links a:hover {
+		color: var(--sl-color-text-accent);
+		text-decoration: underline;
+	}
+</style>

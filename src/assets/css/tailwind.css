@@ -1,0 +1,65 @@
+/*@tailwind base; */
+@import 'tailwindcss/utilities' layer(utilities);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+[data-starlight] .tabs [role="tablist"] {
+  display: flex !important;
+  border-bottom: 1px solid var(--sl-color-gray-5) !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+[data-starlight] .tabs [role="tab"] {
+  cursor: pointer !important;
+  padding: 0.75rem 1rem !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--sl-color-gray-2) !important;
+  text-decoration: none !important;
+}
+
+[data-starlight] .tabs [role="tab"][aria-selected="true"] {
+  color: var(--sl-color-white) !important;
+  border-bottom: 2px solid var(--sl-color-accent) !important;
+}
+
+[data-starlight] .tabs [role="tabpanel"][hidden] {
+  display: none !important;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-bg: #1b1d21;
+  --sl-color-bg-nav: #24262a;
+  --sl-color-bg-sidebar: #24262a;
+  --sl-color-bg-inline-code: #18181b;
+}
+
+:root[data-theme='dark'] code:not(pre code) {
+  background-color: #3f3f46 !important;
+  color: #e2e8f0 !important; /* Light gray text */
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: .8125rem !important;
+}
+
+/* Also fix it for light theme to ensure consistency */
+:root[data-theme='light'] code:not(pre code) {
+  background-color: #e4e4e7 !important;
+  color: #334155 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: .8125rem !important;
+}
+
+/* Ensure it works regardless of theme detection */
+code:not(pre code) {
+  background-color: var(--sl-color-bg-inline-code) !important;
+  color: var(--sl-color-text) !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: .8125rem !important;
+}

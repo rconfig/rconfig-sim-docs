@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: rcfg-sim tool bug or feature
+    url: https://github.com/rconfig/rconfig-sim/issues/new/choose
+    about: This repo is the docs site only. Report tool behaviour, CLI, metrics, or driver issues here.
+  - name: Using rConfig (the NCM platform)
+    url: https://docs.rconfig.com
+    about: Questions about using rConfig itself are covered in the rConfig documentation.
+  - name: Security report
+    url: https://github.com/rconfig/rconfig-sim-docs/security/advisories/new
+    about: Please report vulnerabilities privately, not as a public issue.

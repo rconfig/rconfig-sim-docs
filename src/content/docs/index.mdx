@@ -1,0 +1,101 @@
+---
+title: rcfg-sim — high-density network device SSH simulator
+description: rcfg-sim is an open-source Cisco IOS and multi-vendor SSH simulator that stands up 50,000+ realistic network devices on a single host for load-testing network automation and configuration tooling.
+template: splash
+hero:
+  tagline: Stand up 50,000+ realistic SSH-speaking network devices on a single host. Load-test your automation at production scale — without a warehouse of hardware.
+  image:
+    file: ../../assets/logo.png
+    alt: rcfg-sim — the network device SSH simulator
+  actions:
+    - text: Quickstart
+      link: /getting-started/quickstart/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/rconfig/rconfig-sim
+      icon: external
+      variant: secondary
+head:
+  - tag: script
+    attrs:
+      type: application/ld+json
+    content: |
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "rcfg-sim",
+        "description": "Open-source high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration management tooling at 50,000+ devices on a single host.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux",
+        "url": "https://simdocs.rconfig.com",
+        "softwareVersion": "0.0.3",
+        "programmingLanguage": "Go",
+        "license": "https://opensource.org/licenses/MIT",
+        "codeRepository": "https://github.com/rconfig/rconfig-sim",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "rConfig", "url": "https://www.rconfig.com" }
+      }
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## What is rcfg-sim?
+
+**rcfg-sim** is a high-density SSH simulator for network devices. A single commodity host
+hosts **50,000+ concurrent SSH listeners** — each one speaking real SSH, presenting a
+realistic Cisco IOS (or Ciena TL1) personality, and streaming a multi-KB to multi-MB
+running-config on demand. It exists so you can answer scaling questions about network
+automation and **network configuration management (NCM)** platforms with production-shaped
+load, instead of a 50-device lab.
+
+It is free and open source (MIT), written in Go, and depends on only three external
+libraries.
+
+<CardGrid stagger>
+	<Card title="Real SSH, not a mock" icon="seti:powershell">
+		Every listener uses `golang.org/x/crypto/ssh`. Clients authenticate, run
+		`show running-config`, and read bytes off the wire exactly as they would
+		against real hardware.
+	</Card>
+	<Card title="Zero-copy at scale" icon="rocket">
+		Configs are `mmap`'d and streamed directly to the SSH channel. A 5 MB config
+		allocates nothing on the hot path, so one host sustains tens of thousands of
+		concurrent sessions.
+	</Card>
+	<Card title="Realistic, deterministic configs" icon="document">
+		The generator renders Cisco IOS configs from ~30 KB access switches up to
+		128 MB pathological cores. The same seed produces byte-identical output every
+		run.
+	</Card>
+	<Card title="Built for test rigs" icon="approve-check">
+		Prometheus metrics, deterministic fault injection, per-vendor drivers, and
+		systemd-native operation — designed to be driven hard and observed closely.
+	</Card>
+</CardGrid>
+
+## Why it exists
+
+Real-world network fleets span 100 to 50,000+ devices. Bugs that only appear at 50k scale —
+scheduler fairness, burst handling, diff-engine scaling, retry storms, resource envelopes —
+never show up against a handful of lab devices. The alternatives are buying ~$2M of hardware
+or burning a datacentre on VM emulation. rcfg-sim delivers the same production-shaped load
+from one box.
+
+## Start here
+
+<CardGrid>
+	<LinkCard title="Quickstart" href="/getting-started/quickstart/" description="Generate 100 devices, run the server on loopback, SSH in, and scrape metrics — in five minutes." />
+	<LinkCard title="Installation" href="/installation/prerequisites/" description="System requirements, building from source, and a full systemd install for 50k listeners." />
+	<LinkCard title="Drivers & vendors" href="/drivers/overview/" description="How the pluggable driver framework works, plus the Cisco IOS and Ciena TL1 personalities." />
+	<LinkCard title="CLI reference" href="/reference/cli/" description="Every flag and default for both binaries — treated as public API." />
+</CardGrid>
+
+## Built by the rConfig team
+
+rcfg-sim is maintained by the team behind [rConfig](https://www.rconfig.com), a
+network configuration management platform. It was built to load-test rConfig itself, and is
+released as a standalone open-source tool that works with **any** SSH-based automation or
+NCM system. See [Using rcfg-sim with rConfig](/examples/using-with-rconfig/) for how the two
+fit together.

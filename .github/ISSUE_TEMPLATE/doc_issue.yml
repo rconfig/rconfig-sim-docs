@@ -1,0 +1,31 @@
+name: 📝 Documentation issue
+description: Report an error, gap, or improvement for the rcfg-sim docs site
+labels: [documentation]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: URL or file path of the affected page
+      placeholder: https://simdocs.rconfig.com/drivers/cisco-ios/
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong or missing?
+      description: Describe the error, ambiguity, or gap. Quote the text if helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: Optional — how you'd word or structure it instead.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmations
+      options:
+        - label: This is about the documentation, not the rcfg-sim tool's behaviour
+          required: true

@@ -1,0 +1,26 @@
+{
+	// Cloudflare Workers static-assets deployment for the rcfg-sim docs site.
+	// Build first (`npm run build`), then `npx wrangler deploy`.
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rcfg-sim-docs",
+	"compatibility_date": "2025-01-01",
+	// The top-level config is production (simdocs.rconfig.com). The `dev`
+	// environment serves simdocs.dev.rconfig.com and must be built with
+	// PUBLIC_SITE_URL set to the dev URL so its output is emitted noindex.
+	"assets": {
+		"directory": "./dist",
+		// Serve the generated 404.html for unmatched paths (Starlight emits one).
+		"not_found_handling": "404-page"
+	},
+	"env": {
+		"dev": {
+			"name": "rcfg-sim-docs-dev",
+			"assets": {
+				"directory": "./dist",
+				"not_found_handling": "404-page"
+			}
+		}
+	}
+	// Custom domains (simdocs.rconfig.com / simdocs.dev.rconfig.com) are attached
+	// to these Workers in the Cloudflare dashboard (Workers > Settings > Domains).
+}

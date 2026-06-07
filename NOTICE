@@ -1,0 +1,17 @@
+rcfg-sim documentation site
+Copyright (c) 2026 OS Informatics Limited
+
+The source code and documentation prose in this repository are licensed under
+the MIT License (see LICENSE).
+
+TRADEMARKS AND BRAND ASSETS
+
+"rConfig", "rcfg-sim", the rConfig and "Sim by rConfig" logos, wordmarks, and
+other brand assets (including the files in src/assets/ and public/ that depict
+them) are trademarks of OS Informatics Limited. They are NOT covered by the MIT
+License and may not be used to imply endorsement, affiliation, or to identify
+forks or derivative works without prior written permission.
+
+You may keep the brand assets in place when running or contributing to this
+documentation site. If you fork it for an unrelated project, please replace the
+logos, wordmarks, and the "by rConfig" branding with your own.

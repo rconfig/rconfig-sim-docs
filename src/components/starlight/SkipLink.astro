@@ -1,0 +1,40 @@
+---
+const pageTitleId = "_top";
+// GTM noscript fallback — only rendered when a dedicated container ID is set.
+const googleTagManagerId = import.meta.env.PUBLIC_GTM_CONTAINER_ID || "";
+const t = (Astro.locals as { t?: (key: string) => string }).t;
+---
+
+{googleTagManagerId && (
+	<noscript>
+		<iframe
+			title="Google Tag Manager"
+			src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+			height="0"
+			width="0"
+			style="display:none;visibility:hidden"
+		></iframe>
+	</noscript>
+)}
+<a href={`#${pageTitleId}`}>{t ? t("skipLink.label") : "Skip to content"}</a>
+
+<style>
+	@layer starlight.core {
+		a {
+			clip: rect(0, 0, 0, 0);
+			position: fixed;
+			top: 0.75rem;
+			inset-inline-start: 0.75rem;
+		}
+		a:focus {
+			clip: unset;
+			z-index: var(--sl-z-index-skiplink);
+			display: block;
+			padding: 0.5rem 1rem;
+			text-decoration: none;
+			color: var(--sl-color-text-invert);
+			background-color: var(--sl-color-text-accent);
+			box-shadow: var(--sl-shadow-lg);
+		}
+	}
+</style>
