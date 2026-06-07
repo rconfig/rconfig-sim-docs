@@ -2,7 +2,7 @@ import sidebarData from "./sidebar.json"; // Sidebar navigation structure
 import sitemap from "@astrojs/sitemap"; // Generates sitemap.xml for SEO
 import starlight from "@astrojs/starlight"; // Documentation theme/framework
 import starlightVideos from "starlight-videos"; // Video embedding plugin for Starlight
-import tailwind from "@astrojs/tailwind"; // Tailwind CSS integration
+import tailwindcss from "@tailwindcss/vite"; // Tailwind CSS v4 integration
 import { defineConfig } from "astro/config";
 import { fileURLToPath } from "node:url";
 
@@ -34,12 +34,8 @@ const buildCsp = (upgradeInsecure) =>
 		"base-uri 'self'",
 		"object-src 'none'",
 		"form-action 'self'",
-		analyticsEnabled
-			? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com"
-			: "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com",
-		analyticsEnabled
-			? "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com"
-			: "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com",
+		analyticsEnabled ? "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com https://static.cloudflareinsights.com https://analytics.ahrefs.com" : "script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://static.cloudflareinsights.com https://analytics.ahrefs.com",
+		analyticsEnabled ? "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://cloudflareinsights.com https://static.cloudflareinsights.com https://analytics.ahrefs.com" : "connect-src 'self' https://cloudflareinsights.com https://static.cloudflareinsights.com https://analytics.ahrefs.com",
 		"img-src 'self' https: data: blob:",
 		"style-src 'self' 'unsafe-inline'",
 		"font-src 'self' https: data:",
@@ -64,6 +60,19 @@ const buildHeadTags = (upgradeInsecure) => [
 	{ tag: "meta", attrs: { property: "og:image:height", content: "640" } },
 	{ tag: "meta", attrs: { name: "twitter:card", content: "summary_large_image" } },
 	{ tag: "meta", attrs: { name: "twitter:image", content: `${siteUrl}/og.png` } },
+	// Ahrefs Web Analytics — production host only (keeps the noindex dev host out of stats).
+	...(isProd
+		? [
+				{
+					tag: "script",
+					attrs: {
+						src: "https://analytics.ahrefs.com/analytics.js",
+						"data-key": "/19fCWTCKelr3HxkT6v8uQ",
+						async: true,
+					},
+				},
+		  ]
+		: []),
 	// Discoverability for search engines (prod only).
 	...(isProd
 		? [
@@ -76,7 +85,7 @@ const buildHeadTags = (upgradeInsecure) => [
 						href: "/sitemap-index.xml",
 					},
 				},
-			]
+		  ]
 		: []),
 	// Keep non-production hosts (e.g. simdocs.dev.rconfig.com) out of the index
 	// so they never compete with the canonical site for the same content.
@@ -86,7 +95,7 @@ const buildHeadTags = (upgradeInsecure) => [
 					tag: "meta",
 					attrs: { name: "robots", content: "noindex, nofollow" },
 				},
-			]
+		  ]
 		: []),
 	// Analytics — only emitted when a dedicated GTM container ID is provided.
 	...(analyticsEnabled
@@ -126,7 +135,7 @@ const buildHeadTags = (upgradeInsecure) => [
 						})(window,document,'script','dataLayer','${googleTagManagerId}');
 					`,
 				},
-			]
+		  ]
 		: []),
 ];
 
@@ -136,8 +145,7 @@ export default defineConfig({
 		sitemap(),
 		starlight({
 			title: "rcfg-sim",
-			description:
-				"rcfg-sim is an open-source, high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration tooling at 50,000+ devices on a single host.",
+			description: "rcfg-sim is an open-source, high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration tooling at 50,000+ devices on a single host.",
 			disable404Route: false,
 			tagline: "High-density network device SSH simulator",
 			customCss: ["./src/assets/css/tailwind.css", "./src/assets/css/custom.css"],
@@ -168,9 +176,9 @@ export default defineConfig({
 			sidebar: sidebarData,
 			plugins: [starlightVideos()],
 		}),
-		tailwind({ applyBaseStyles: false }),
 	],
 	vite: {
+		plugins: [tailwindcss()],
 		resolve: {
 			alias: {
 				"@": fileURLToPath(new URL("./src", import.meta.url)),
