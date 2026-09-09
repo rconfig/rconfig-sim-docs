@@ -14,12 +14,12 @@
     },
     "dependencies": {
         "@astrojs/sitemap": "^3.7.3",
-        "@astrojs/starlight": "^0.39.3",
+        "@astrojs/starlight": "^0.42.0",
         "@astrojs/starlight-tailwind": "^5.0.0",
         "@tailwindcss/vite": "^4.3.0",
         "@fontsource-variable/plus-jakarta-sans": "^5.2.6",
         "@fontsource-variable/sora": "^5.2.6",
-        "astro": "^6.4.4",
+        "astro": "^7.3.2",
         "sharp": "^0.34.3",
         "starlight-videos": "^0.4.0",
         "tailwindcss": "^4.3.0"
