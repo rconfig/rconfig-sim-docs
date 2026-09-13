@@ -47,7 +47,7 @@ The config generator. Run once per campaign.
 | `--port-start` | `10000` | First port in the range |
 | `--devices-per-ip` | `2500` | Devices mapped to each IP |
 | `--seed` | `42` | PRNG seed for deterministic output |
-| `--distribution` | `sm:40,md:40,lg:15,xl:5` | Model weights (percent, sum 100). Models: `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `ciena-6500-tl1` |
+| `--distribution` | `sm:40,md:40,lg:15,xl:5` | Model weights (percent, sum 100). Models: `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `ciena-6500-tl1`, `ciena-6500-tl1-gne`, `infinera-dtnx-tl1`, `cisco-ons15454-tl1` |
 | `--username` | `admin` | Username written into the manifest |
 | `--password` | `admin` | Password written into the manifest |
 | `--enable-password` | `enable123` | Enable password written into the manifest |

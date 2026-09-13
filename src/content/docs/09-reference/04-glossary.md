@@ -10,21 +10,29 @@ slug: reference/glossary
 Key terms used across this documentation.
 
 **Bucket / size bucket** — a generator [model](#model) keyed by approximate config size
-(`sm`, `md`, `lg`, `xl`, `2xl`–`6xl`, `ciena-6500-tl1`, `ciena-6500-tl1-gne`). Selected via
+(`sm`, `md`, `lg`, `xl`, `2xl`–`6xl`, `ciena-6500-tl1`, `ciena-6500-tl1-gne`,
+`infinera-dtnx-tl1`, `cisco-ons15454-tl1`). Selected via
 [`--distribution`](/generating-configs/size-buckets/).
 
 **Determinism** — the property that a given [`--seed`](/generating-configs/determinism/)
 produces byte-identical generator output across runs.
 
-**Driver** — a vendor personality (`cisco_ios`, `ciena_tl1`) that owns a device's interactive
-SSH loop. See [Drivers & vendors](/drivers/overview/).
+**Driver** — a vendor personality (`cisco_ios`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1`)
+that owns a device's interactive SSH loop. A non-empty manifest `template` naming no
+registered driver is a startup error. See [Drivers & vendors](/drivers/overview/).
 
 **Fault injection** — deliberately making devices misbehave (`auth_fail`, `disconnect_mid`,
 `slow_response`, `malformed`) to test tooling resilience. See [Faults](/faults/overview/).
 
+**ENE (End NE)** — Cisco's word for what Ciena calls an [RNE](#rne-remote-ne). Same idea:
+an element with no management access of its own, reached through its gateway. See
+[Cisco ONS TL1](/drivers/cisco-ons-tl1/).
+
 **GNE (Gateway NE)** — in TL1, the network element you connect to directly; it proxies
-commands to the [RNEs](#rne-remote-ne) behind it. Emulated by the `ciena-6500-tl1-gne`
-[model](#model). See [Ciena GNE / RNE](/drivers/ciena-tl1/#gateway-and-remote-nes-gne--rne).
+commands to the elements behind it. Emulated by the `ciena-6500-tl1-gne`,
+`infinera-dtnx-tl1` and `cisco-ons15454-tl1` [models](#model). Each vendor names the
+elements differently: Ciena says [RNE](#rne-remote-ne), Cisco says [ENE](#ene-end-ne), and
+Infinera just says remote node. See [Ciena GNE / RNE](/drivers/ciena-tl1/#gateway-and-remote-nes-gne--rne).
 
 **Manifest** — the CSV that maps each `ip:port` to its config, credentials, vendor, and
 [driver](#driver). The contract between the two binaries. See
@@ -45,9 +53,15 @@ load-test. See [Using with rConfig](/examples/using-with-rconfig/).
 
 **rcfg-sim** — the SSH server binary.
 
+**Paged response** — a TL1 answer split across several blocks, every one but the last coded
+`RTRV` rather than `COMPLD`, with the prompt written between them. A client that reads to the
+first prompt leaves the rest on the wire, where they are answered to the next command. Only
+[Infinera](/drivers/infinera-tl1/) does this.
+
 **RNE (Remote NE)** — a TL1 network element with no direct management access, reached only
 through its [GNE](#gne-gateway-ne) by naming its **TID** in a command
-(`RTRV-EQPT:RNE-LIMERICK:3;`). See [Ciena GNE / RNE](/drivers/ciena-tl1/#gateway-and-remote-nes-gne--rne).
+(`RTRV-EQPT:RNE-LIMERICK:3;`). Cisco calls the same thing an [ENE](#ene-end-ne). See
+[Ciena GNE / RNE](/drivers/ciena-tl1/#gateway-and-remote-nes-gne--rne).
 
 **TID (target identifier)** — the TL1 field that names which NE a command is for: empty/`ALL`
 addresses the local node; an RNE's TID routes the command to that [RNE](#rne-remote-ne).

@@ -1,6 +1,6 @@
 ---
 title: "Size buckets & the distribution flag"
-description: "The rcfg-sim config size buckets (sm through 6xl plus ciena-6500-tl1) and how the --distribution flag controls the mix of config sizes across a simulated fleet."
+description: "The rcfg-sim config size buckets (sm through 6xl plus the optical TL1 models) and how the --distribution flag controls the mix of config sizes across a simulated fleet."
 sidebar:
   label: Size buckets & distribution
   order: 2
@@ -19,7 +19,7 @@ that should sum to 100:
 ```bash
 --distribution "sm:40,md:40,lg:15,xl:5"   # the default
 --distribution "xl:50,2xl:30,3xl:20"      # a heavy, large-config fleet
---distribution "ciena-6500-tl1:100"       # an all-Ciena optical fleet
+--distribution "infinera-dtnx-tl1:100"   # an all-Infinera optical fleet
 ```
 
 The default `sm:40,md:40,lg:15,xl:5` approximates a typical enterprise fleet.
@@ -50,18 +50,31 @@ depend on the seed. The `sm`–`xl` buckets have distinct templates; `2xl`–`6x
 The larger tiers exist to stress diff engines, parsers, and storage with configs far beyond
 what most tools are tested against.
 
-## Ciena bucket
+## Optical TL1 models
 
-| Bucket | Approx size | Class | Driver |
+These produce TL1 inventories served by the TL1 drivers, not Cisco configs.
+
+| Model | Approx size | Class | Driver |
 |---|---|---|---|
-| `ciena-6500-tl1` | ~1 KB | Ciena 6500 7-slot optical | `ciena_tl1` |
+| `ciena-6500-tl1` | ~1 KB | Ciena 6500 7-slot optical, standalone | [`ciena_tl1`](/drivers/ciena-tl1/) |
+| `ciena-6500-tl1-gne` | ~7 KB | Ciena gateway fronting 2-5 Remote NEs | [`ciena_tl1`](/drivers/ciena-tl1/) |
+| `infinera-dtnx-tl1` | ~8 KB | Infinera DTN-X fronting 12-30 remote nodes | [`infinera_tl1`](/drivers/infinera-tl1/) |
+| `cisco-ons15454-tl1` | ~2 KB | Cisco ONS 15454 gateway fronting 3-8 End NEs | [`cisco_ons_tl1`](/drivers/cisco-ons-tl1/) |
 
-This model produces a TL1 shelf inventory served by the [Ciena TL1
-driver](/drivers/ciena-tl1/), not a Cisco config. Mix it into a Cisco fleet to test
-multi-vendor handling:
+The gateway models carry the inventories of every element behind them in one config, which is
+why they are larger. An Infinera node gets 12 to 30 remotes deliberately: `RTRV-TIDMAP` pages
+every ten records, so fewer than eleven would never exercise the paging path.
+
+Mix them into a Cisco fleet to test multi-vendor handling:
 
 ```bash
 --distribution "sm:35,md:35,lg:20,ciena-6500-tl1:10"
+```
+
+Or build a mixed optical fleet with no Cisco IOS at all:
+
+```bash
+--distribution "ciena-6500-tl1-gne:40,infinera-dtnx-tl1:40,cisco-ons15454-tl1:20"
 ```
 
 ## Sizing disk

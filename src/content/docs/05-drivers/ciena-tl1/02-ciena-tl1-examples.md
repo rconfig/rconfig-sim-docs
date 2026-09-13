@@ -194,16 +194,16 @@ it. Generate a small GNE fleet and serve it:
   --manifest /tmp/gne/manifest.csv --host-key /tmp/gne/hostkey --ssh-auth none
 ```
 
-Connect to the GNE and log in, then **discover the RNEs** behind it with `RTRV-NBR`:
+Connect to the GNE and log in, then **discover the RNEs** behind it with `RTRV-NE-LIST`:
 
 ```text
 ACT-USER::admin:1::admin;
-RTRV-NBR:ALL:2;
+RTRV-NE-LIST:::2;
 
    CIENA-LAX-1001 26-06-07 11:43:01
 M  2 COMPLD
-   "RNE-LIMERICK:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
-   "RNE-GALWAY:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+   "SHELF-1::SID=\"RNE-LIMERICK\",NENAME=\"RNE-LIMERICK\",GNE=NO,GNEIPADDR=,INETADDR=10.0.254.3,COST=30,NETYPE=00011600"
+   "SHELF-1::SID=\"RNE-GALWAY\",NENAME=\"RNE-GALWAY\",GNE=NO,GNEIPADDR=,INETADDR=10.0.254.4,COST=40,NETYPE=00011600"
 ;
 ```
 
@@ -255,9 +255,11 @@ M  9 DENY
 ```
 
 :::tip[Collecting a whole GNE subtree]
-A collector walks a GNE by issuing `RTRV-NBR` first, then iterating each returned RNE TID with
-`RTRV-EQPT:<TID>:<ctag>;`. The standalone `ciena-6500-tl1` model behaves like a GNE with zero
-RNEs — `RTRV-NBR` returns an empty `COMPLD` — so the same collection logic works for both.
+A collector walks a GNE by issuing `RTRV-NE-LIST` first, then iterating each returned RNE TID
+with `RTRV-EQPT:<TID>:<ctag>;`. The standalone `ciena-6500-tl1` model behaves like a GNE with
+zero RNEs — `RTRV-NE-LIST` returns an empty `COMPLD` — so the same collection logic works for
+both. Other vendors name this command differently: see
+[Infinera](/drivers/infinera-tl1/) and [Cisco ONS](/drivers/cisco-ons-tl1/).
 :::
 
 ## Automation
@@ -299,15 +301,15 @@ client.close()
 
 ### Python — walk a GNE's RNEs
 
-Discover the RNEs with `RTRV-NBR`, then pull each one's inventory by TID. Reuses the `tl1()`
-helper above:
+Discover the RNEs with `RTRV-NE-LIST`, then pull each one's inventory by TID. Reuses the
+`tl1()` helper above:
 
 ```python
 import re
 
 tl1(chan, "ACT-USER::admin:1::admin;")
-nbr = tl1(chan, "RTRV-NBR:ALL:2;")
-rnes = re.findall(r'"(RNE-[A-Z0-9-]+):', nbr)   # ['RNE-LIMERICK', 'RNE-GALWAY', ...]
+nbr = tl1(chan, "RTRV-NE-LIST:::2;")
+rnes = re.findall(r'SID=\\"(RNE-[A-Z0-9-]+)', nbr)   # ['RNE-LIMERICK', 'RNE-GALWAY', ...]
 
 inventories = {"<local>": tl1(chan, "RTRV-EQPT::ALL:100;")}   # the GNE itself
 for i, tid in enumerate(rnes, start=10):

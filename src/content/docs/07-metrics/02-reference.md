@@ -36,10 +36,20 @@ These are the closed sets pre-registered at startup:
   `CmdShowInventory`, `CmdExit`.
 
 :::note[TL1 command labels]
-The [Ciena TL1 driver](/drivers/ciena-tl1/) emits additional `command` values —
+The three TL1 drivers emit additional `command` values, appearing once a TL1 device is served
+rather than being part of the pre-registered Cisco set:
+
 `CmdTL1ActUser`, `CmdTL1RtrvEqpt`, `CmdTL1RtrvAlmAll`, `CmdTL1RtrvCondAll`,
-`CmdTL1RtrvActiveUser`, `CmdTL1RtrvSwVer`, `CmdTL1RtrvSys`, `CmdTL1Deny`, `CmdTL1Unknown`.
-These appear once a Ciena device is served; they are not part of the pre-registered Cisco set.
+`CmdTL1RtrvActiveUser`, `CmdTL1RtrvSwVer`, `CmdTL1RtrvSys`, `CmdTL1RtrvNeList`,
+`CmdTL1RtrvTidmap`, `CmdTL1RtrvMapNetwork`, `CmdTL1Deny`, `CmdTL1Unknown`.
+
+**The label says which verb, not which vendor.** All three TL1 drivers share these labels and
+add only genuinely new verbs: `CmdTL1RtrvNeList` (Ciena), `CmdTL1RtrvTidmap` (Infinera),
+`CmdTL1RtrvMapNetwork` (Cisco ONS). A parallel label set per vendor would have pushed unique
+series past the cardinality cap; sharing keeps four drivers at 37 of the 50 allowed.
+
+`CmdTL1RtrvNbr` was renamed to `CmdTL1RtrvNeList` when the Ciena driver stopped emitting the
+invented `RTRV-NBR` payload. Dashboards and alerts matching the old label need updating.
 :::
 
 ## Histogram buckets
