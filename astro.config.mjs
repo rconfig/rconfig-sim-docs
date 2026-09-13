@@ -147,7 +147,6 @@ export default defineConfig({
 			title: "rcfg-sim",
 			description: "rcfg-sim is an open-source, high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration tooling at 50,000+ devices on a single host.",
 			disable404Route: false,
-			tagline: "High-density network device SSH simulator",
 			customCss: ["./src/assets/css/tailwind.css", "./src/assets/css/custom.css"],
 			favicon: "/logo.png",
 			// Official "Sim by rConfig" lockup. Gradient on the light theme, white on
