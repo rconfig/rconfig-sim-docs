@@ -79,6 +79,30 @@
                 ]
             },
             {
+                "label": "Infinera DTN-X TL1",
+                "collapsed": true,
+                "items": [
+                    {
+                        "slug": "drivers/infinera-tl1"
+                    },
+                    {
+                        "slug": "drivers/infinera-tl1-examples"
+                    }
+                ]
+            },
+            {
+                "label": "Cisco ONS 15454 TL1",
+                "collapsed": true,
+                "items": [
+                    {
+                        "slug": "drivers/cisco-ons-tl1"
+                    },
+                    {
+                        "slug": "drivers/cisco-ons-tl1-examples"
+                    }
+                ]
+            },
+            {
                 "slug": "drivers/writing-a-driver"
             }
         ]

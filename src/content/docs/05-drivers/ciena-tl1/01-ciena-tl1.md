@@ -45,7 +45,8 @@ device returns a `COMPLD` block and unlocks the `RTRV-*` verbs.
 | `RTRV-ACTIVE-USER` | The active user session |
 | `RTRV-SW-VER` | Software version |
 | `RTRV-SYS` | System identity (SID, type, shelf serial) |
-| `RTRV-NBR` | Lists the Remote NEs reachable through a Gateway NE — see [GNE / RNE](#gateway-and-remote-nes-gne--rne) |
+| `RTRV-NE-LIST` | Lists the Remote NEs reachable through a Gateway NE — see [GNE / RNE](#gateway-and-remote-nes-gne--rne) |
+| `RTRV-NODES` | The same set in the 6500's other neighbour format |
 
 Any other verb after login returns `DENY` with `ICNV` (input, command not valid). The exact
 TL1 block formatting (`COMPLD`/`DENY` headers, the SID and timestamp) is produced by the
@@ -67,17 +68,29 @@ generator model produced it:
 | `ciena-6500-tl1` | Standalone node (a GNE with no RNEs) |
 | `ciena-6500-tl1-gne` | Gateway NE fronting 2–5 RNEs, whose inventories are generated into the device's config |
 
-After login, `RTRV-NBR` lists the RNEs reachable through the GNE:
+After login, `RTRV-NE-LIST` lists the RNEs reachable through the GNE:
 
 ```text
-RTRV-NBR:ALL:2;
+RTRV-NE-LIST:::2;
 
    CIENA-LAX-1001 26-06-07 11:42:13
 M  2 COMPLD
-   "RNE-LIMERICK:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
-   "RNE-GALWAY:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"
+   "SHELF-1::SID=\"RNE-LIMERICK\",NENAME=\"RNE-LIMERICK\",GNE=NO,GNEIPADDR=,INETADDR=10.0.254.3,COST=30,NETYPE=00011600"
+   "SHELF-1::SID=\"RNE-GALWAY\",NENAME=\"RNE-GALWAY\",GNE=NO,GNEIPADDR=,INETADDR=10.0.254.4,COST=40,NETYPE=00011600"
 ;
 ```
+
+`INETADDR` is the RNE's own management address and `GNE=YES` marks a neighbour that is itself
+a gateway. `RTRV-NODES` reports the same set keyed on `TID=` with `REMOTESHELF`, `IPADDR`,
+`MEMBER` and `SITEID` fields.
+
+:::caution[Breaking change]
+Before this release the driver answered **`RTRV-NBR`** with
+`"RNE-LIMERICK:PROTOCOL=OSC,REACHABLE=YES,STATE=IS-NR"`. That verb and that payload were
+invented in this simulator and no real 6500 answers them, so anything written against the old
+output was written against a format that does not exist. The metric label followed the verb:
+`CmdTL1RtrvNbr` is now `CmdTL1RtrvNeList`.
+:::
 
 You then address any RNE by TID. The same verb set works locally or against an RNE:
 
@@ -89,7 +102,7 @@ You then address any RNE by TID. The same verb set works locally or against an R
 A TID that is empty, `ALL`, or the GNE's own SID is treated as **local**; an unknown or
 unreachable RNE TID returns `DENY` with `IIAC` (invalid access identifier). Both the
 TID-addressed short form `VERB:TID:CTAG;` and the strict `VERB::AID:CTAG;` form are accepted.
-The standalone model answers `RTRV-NBR` with an empty list and returns `IIAC` for any RNE TID.
+The standalone model answers `RTRV-NE-LIST` with an empty list and returns `IIAC` for any RNE TID.
 
 GNE devices stream the targeted RNE's inventory
 [zero-copy from `mmap`](/getting-started/concepts/#zero-copy-config-delivery) just like a

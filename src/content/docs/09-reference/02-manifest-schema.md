@@ -22,7 +22,7 @@ hostname,ip,port,vendor,template,username,password,enable_password,config_file,s
 | 2 | `ip` | string | IP the listener binds |
 | 3 | `port` | int | Port the listener binds |
 | 4 | `vendor` | string | Manifest vendor string (e.g. `Cisco`, `Ciena`) |
-| 5 | `template` | string | Driver id — `cisco_ios`, `ciena_tl1` (unknown/empty → `cisco_ios`) |
+| 5 | `template` | string | Driver id — `cisco_ios`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1` (empty → `cisco_ios`) |
 | 6 | `username` | string | Accepted username for this device |
 | 7 | `password` | string | Accepted password |
 | 8 | `enable_password` | string | Enable-mode password |
