@@ -8,9 +8,9 @@ slug: drivers/overview
 ---
 
 A **driver** is a vendor personality. It owns the full interactive loop for one device:
-reading input, parsing commands, and writing responses. rcfg-sim ships two —
-[`cisco_ios`](/drivers/cisco-ios/), [`ciena_tl1`](/drivers/ciena-tl1/),
-[`infinera_tl1`](/drivers/infinera-tl1/) and [`cisco_ons_tl1`](/drivers/cisco-ons-tl1/) — and adding more
+reading input, parsing commands, and writing responses. rcfg-sim ships five:
+[`cisco_ios`](/drivers/cisco-ios/), [`junos`](/drivers/junos/), [`ciena_tl1`](/drivers/ciena-tl1/),
+[`infinera_tl1`](/drivers/infinera-tl1/) and [`cisco_ons_tl1`](/drivers/cisco-ons-tl1/). Adding more
 is deliberately a one-file job.
 
 ## The Driver interface
@@ -46,12 +46,12 @@ new SSH session
    ▼
 manifest row ── template column ──▶ driver registry
                                         │
-        ┌──────────┬──────────┬─────────┴────────┬──────────┐
-    cisco_ios   ciena_tl1  infinera_tl1   cisco_ons_tl1   empty
-        │           │           │                │          │
-        ▼           ▼           ▼                ▼          ▼
-   ciscoIOS   cienaTL1   infineraTL1     ciscoONSTL1   ciscoIOS
-    .Serve     .Serve       .Serve           .Serve     (fallback)
+     ┌───────────┬───────────┬──────────┴───┬───────────────┬─────────────┐
+ cisco_ios     junos     ciena_tl1    infinera_tl1    cisco_ons_tl1     empty
+     │           │           │              │               │             │
+     ▼           ▼           ▼              ▼               ▼             ▼
+ ciscoIOS      junos     cienaTL1      infineraTL1     ciscoONSTL1    ciscoIOS
+  .Serve      .Serve      .Serve         .Serve          .Serve      (fallback)
 ```
 
 :::caution[An unknown driver id is now a startup error]
@@ -91,7 +91,10 @@ func init() { registerDriver(ciscoIOS{}) }
 
 ## The shipped drivers
 
-- [Cisco IOS (`cisco_ios`)](/drivers/cisco-ios/) — `show` commands, enable mode, prefix matching
+- [Cisco IOS (`cisco_ios`)](/drivers/cisco-ios/) — `show` commands, enable mode, prefix matching.
+  Also serves **Arista EOS** devices, whose CLI is IOS-shaped; see
+  [EOS on `cisco_ios`](/drivers/cisco-ios/#arista-eos-on-cisco_ios).
+- [Juniper Junos (`junos`)](/drivers/junos/) — `user@host> ` prompt, no enable mode, `show configuration`
 - [Ciena 6500 TL1 (`ciena_tl1`)](/drivers/ciena-tl1/) — `ACT-USER` login, `RTRV-NE-LIST` neighbours
 - [Infinera DTN-X TL1 (`infinera_tl1`)](/drivers/infinera-tl1/) — `>` prompt, **paged** `RTRV-TIDMAP`
 - [Cisco ONS 15454 TL1 (`cisco_ons_tl1`)](/drivers/cisco-ons-tl1/) — **positional** `RTRV-MAP-NETWORK` records
@@ -106,5 +109,8 @@ does. Those differences are the point, not an inconvenience:
 | Record grammar | keyword, quoted | keyword, empty AID | **positional** |
 | Response | one block | **paged** | one block |
 | Header SID when routing | the addressed TID | its own system name | the addressed TID |
+
+`cisco_ios` and `junos` can also answer any command from a per-device file; see
+[Command files](/running-server/command-files/).
 
 Want to add your own? See [Writing a new driver](/drivers/writing-a-driver/).

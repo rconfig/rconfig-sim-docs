@@ -46,10 +46,19 @@ rather than being part of the pre-registered Cisco set:
 **The label says which verb, not which vendor.** All three TL1 drivers share these labels and
 add only genuinely new verbs: `CmdTL1RtrvNeList` (Ciena), `CmdTL1RtrvTidmap` (Infinera),
 `CmdTL1RtrvMapNetwork` (Cisco ONS). A parallel label set per vendor would have pushed unique
-series past the cardinality cap; sharing keeps four drivers at 37 of the 50 allowed.
+series past the cardinality cap; sharing keeps the five drivers at 39 of the 50 allowed.
 
 `CmdTL1RtrvNbr` was renamed to `CmdTL1RtrvNeList` when the Ciena driver stopped emitting the
 invented `RTRV-NBR` payload. Dashboards and alerts matching the old label need updating.
+:::
+
+:::note[Junos and command-file labels]
+The [`junos` driver](/drivers/junos/) adds `CmdJunosSetCli` and `CmdJunosShowConfiguration`,
+and reuses `CmdUnknown`, `CmdEmpty` and `CmdExit`.
+
+Every response served from a [command file](/running-server/command-files/) is labelled
+`file`, whatever the command text or driver, so file-backed commands add exactly one series.
+That series is pre-registered only when `--commands-root` is set.
 :::
 
 ## Histogram buckets

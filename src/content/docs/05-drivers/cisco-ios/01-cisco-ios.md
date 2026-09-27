@@ -48,7 +48,9 @@ password moves the prompt from `>` to `#`. A wrong one prints `% Access denied`.
 | `show inventory` | Canned inventory; chassis SN matches `show version`'s serial |
 | `exit` / `quit` / `logout` / `end` | Leave enable mode, or close the session |
 
-Anything else returns `% Invalid input detected at '^' marker.`
+Anything else returns `% Invalid input detected at '^' marker.`, unless a
+[command file](/running-server/command-files/) matches it. Command files are checked first,
+so they can also override the commands above.
 
 ## Prefix matching
 
@@ -70,6 +72,17 @@ Each resolved command is recorded under `rcfgsim_command_duration_seconds{comman
 The Cisco driver's label values are the `Cmd*` names: `CmdShowRunningConfig`, `CmdEnable`,
 `CmdShowVersion`, `CmdUnknown`, `CmdAmbiguous`, and the rest. See the
 [metrics reference](/metrics/reference/).
+
+## Arista EOS on `cisco_ios`
+
+rcfg-sim has no separate EOS driver. EOS's CLI is IOS-shaped: `host>` becomes `host#` after
+`enable`, and `terminal length 0` turns paging off, so an EOS device runs on `cisco_ios`
+(manifest `template` = `cisco_ios`, `vendor` = `Arista`). EOS-specific output, such as
+`show lldp neighbors detail` in EOS format or an EOS `show version`, comes from
+[command files](/running-server/command-files/). The
+[mesh-campus scenario](/examples/mesh-campus/) has a worked EOS device, `core-01`.
+
+In a configuration manager, an IOS SSH template with enable mode works for these devices.
 
 ## SSH authentication
 

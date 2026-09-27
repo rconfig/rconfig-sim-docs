@@ -67,6 +67,15 @@
                 ]
             },
             {
+                "label": "Juniper Junos",
+                "collapsed": true,
+                "items": [
+                    {
+                        "slug": "drivers/junos"
+                    }
+                ]
+            },
+            {
                 "label": "Ciena 6500 TL1",
                 "collapsed": true,
                 "items": [

@@ -25,7 +25,7 @@ hostname,ip,port,vendor,template,username,password,enable_password,config_file,s
 | `ip` | IP the listener binds |
 | `port` | Port the listener binds |
 | `vendor` | Manifest vendor string (e.g. `Cisco`, `Ciena`) |
-| `template` | **Driver id** — resolves the runtime [driver](/drivers/overview/) (`cisco_ios`, `ciena_tl1`) |
+| `template` | **Driver id** — resolves the runtime [driver](/drivers/overview/) (`cisco_ios`, `junos`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1`) |
 | `username` | Accepted username for this device |
 | `password` | Accepted password |
 | `enable_password` | Enable-mode password |
@@ -52,8 +52,10 @@ You can write a manifest by hand to build a precise, small fleet — useful for 
 as the header matches and each `config_file` exists (or, for `ciena_tl1`, even if the payload
 is absent — the driver synthesizes a small canned inventory), the server will serve it.
 
-Unknown or empty `template` values fall back to the `cisco_ios` driver, so older manifests
-keep working unchanged.
+An empty `template` value falls back to the `cisco_ios` driver, so older manifests keep
+working unchanged. A non-empty value that names no registered driver stops the server at
+startup. The generator never writes `junos`; set it by hand for Junos devices, as the
+[mesh-campus scenario](/examples/mesh-campus/) does.
 
 ## Next
 

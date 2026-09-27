@@ -17,7 +17,11 @@ Key terms used across this documentation.
 **Determinism** — the property that a given [`--seed`](/generating-configs/determinism/)
 produces byte-identical generator output across runs.
 
-**Driver** — a vendor personality (`cisco_ios`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1`)
+**Command file** — a per-device file, `<root>/<hostname>/<slug>.txt`, that answers one CLI
+command when the server runs with `--commands-root`. See
+[Command files](/running-server/command-files/).
+
+**Driver** — a vendor personality (`cisco_ios`, `junos`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1`)
 that owns a device's interactive SSH loop. A non-empty manifest `template` naming no
 registered driver is a startup error. See [Drivers & vendors](/drivers/overview/).
 

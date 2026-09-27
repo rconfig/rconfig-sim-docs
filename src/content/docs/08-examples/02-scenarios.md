@@ -10,6 +10,9 @@ slug: examples/scenarios
 A staged approach to scaling up. Each rung validates something before you commit to the next;
 the repo's `TEST-SCENARIOS.md` covers the full progression in depth.
 
+For topology discovery rather than scale, see the [mesh-campus scenario](/examples/mesh-campus/):
+three hand-built devices with matching LLDP/CDP neighbours.
+
 ## The ladder
 
 ```text

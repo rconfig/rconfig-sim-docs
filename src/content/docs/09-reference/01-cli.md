@@ -31,6 +31,7 @@ The SSH server. One instance per IP.
 | `--fault-rate` | `0.0` | Probability `[0,1]` an enabled fault fires per event |
 | `--fault-types` | `""` | Comma-separated faults: `auth_fail`, `disconnect_mid`, `slow_response`, `malformed` |
 | `--max-concurrent-sessions` | `5000` | Semaphore cap on concurrent sessions |
+| `--commands-root` | `""` | Directory of per-device command output files, `DIR/<hostname>/<slug>.txt` (empty = off). See [Command files](/running-server/command-files/) |
 | `--log-level` | `info` | `error` \| `warn` \| `info` \| `debug` |
 
 ## `rcfg-sim-gen`
