@@ -1,6 +1,6 @@
 ---
 title: "Cisco ONS 15454 TL1 driver"
-description: "The rcfg-sim cisco_ons_tl1 driver: TL1 over SSH for the Cisco ONS 15454, with positional RTRV-MAP-NETWORK records and ENE terminology."
+description: "The rConfig-sim cisco_ons_tl1 driver: TL1 over SSH for the Cisco ONS 15454, with positional RTRV-MAP-NETWORK records and ENE terminology."
 sidebar:
   label: Cisco ONS TL1 driver
   order: 8

@@ -1,6 +1,6 @@
 ---
 title: "Cisco IOS driver"
-description: "The rcfg-sim cisco_ios driver: supported show commands, enable mode, Cisco-style prefix matching, and the greeting and session flow it presents over SSH."
+description: "The rConfig-sim cisco_ios driver: supported show commands, enable mode, Cisco-style prefix matching, and the greeting and session flow it presents over SSH."
 sidebar:
   label: Cisco IOS driver
   order: 2
@@ -75,7 +75,7 @@ The Cisco driver's label values are the `Cmd*` names: `CmdShowRunningConfig`, `C
 
 ## Arista EOS on `cisco_ios`
 
-rcfg-sim has no separate EOS driver. EOS's CLI is IOS-shaped: `host>` becomes `host#` after
+rConfig-sim has no separate EOS driver. EOS's CLI is IOS-shaped: `host>` becomes `host#` after
 `enable`, and `terminal length 0` turns paging off, so an EOS device runs on `cisco_ios`
 (manifest `template` = `cisco_ios`, `vendor` = `Arista`). EOS-specific output, such as
 `show lldp neighbors detail` in EOS format or an EOS `show version`, comes from

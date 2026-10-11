@@ -1,6 +1,6 @@
 ---
 title: "Concurrency & graceful drain"
-description: "How rcfg-sim caps concurrent sessions and drains in-flight connections on shutdown, for clean restarts of high-density SSH simulator instances."
+description: "How rConfig-sim caps concurrent sessions and drains in-flight connections on shutdown, for clean restarts of high-density SSH simulator instances."
 sidebar:
   label: Concurrency & graceful drain
   order: 4
@@ -8,7 +8,7 @@ slug: running-server/graceful-shutdown
 ---
 
 A simulator that's driven hard needs predictable behaviour at its limits and on shutdown.
-rcfg-sim caps concurrency explicitly and drains cleanly.
+rConfig-sim caps concurrency explicitly and drains cleanly.
 
 ## Concurrency cap
 

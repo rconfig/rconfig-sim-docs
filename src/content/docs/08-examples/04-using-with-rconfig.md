@@ -1,13 +1,13 @@
 ---
-title: "Using rcfg-sim with rConfig"
-description: "How to point rConfig at an rcfg-sim simulated fleet to load-test network configuration management workflows — backups, diffs, and compliance — at scale."
+title: "Using rConfig-sim with rConfig"
+description: "How to point rConfig at an rConfig-sim simulated fleet to load-test network configuration management workflows — backups, diffs, and compliance — at scale."
 sidebar:
   label: Using with rConfig
   order: 4
 slug: examples/using-with-rconfig
 ---
 
-rcfg-sim was originally built to load-test [rConfig](https://www.rconfig.com), the network
+rConfig-sim was originally built to load-test [rConfig](https://www.rconfig.com), the network
 configuration management (NCM) platform, and the two pair naturally. This page explains the
 relationship and how to wire them together.
 
@@ -20,7 +20,7 @@ It's worth being precise about what each one is:
   across a real fleet. Its product site is [www.rconfig.com](https://www.rconfig.com), and its
   user documentation lives at [docs.rconfig.com](https://docs.rconfig.com) (with the V8 core
   developer docs at [v8coredocs.rconfig.com](https://v8coredocs.rconfig.com)).
-- **rcfg-sim** (this project) is a **test instrument** — a simulator that presents a fleet of
+- **rConfig-sim** (this project) is a **test instrument** — a simulator that presents a fleet of
   fake devices so you can drive rConfig (or any SSH-based tool) at scale.
 
 If you're looking for how to *use* rConfig itself — installing it, configuring device
@@ -47,7 +47,7 @@ simulator.
    [manifest](/generating-configs/manifest/). The rConfig
    [device-management docs](https://docs.rconfig.com) cover bulk import.
 4. **Run a backup cycle** across the whole fleet and watch both sides — rConfig's own metrics
-   and rcfg-sim's [Prometheus metrics](/metrics/overview/).
+   and rConfig-sim's [Prometheus metrics](/metrics/overview/).
 
 ## What you can learn
 
@@ -66,6 +66,6 @@ way they really do. This tests rConfig's multi-vendor handling, not just its Cis
 
 ## Not an rConfig user?
 
-rcfg-sim speaks plain SSH and emits standard Prometheus metrics — it works with **any**
+rConfig-sim speaks plain SSH and emits standard Prometheus metrics — it works with **any**
 SSH-based automation, backup, or NCM system. Nothing on this site assumes rConfig beyond this
 page.

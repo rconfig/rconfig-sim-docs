@@ -1,13 +1,13 @@
 ---
 title: "Determinism & seeds"
-description: "How rcfg-sim generates byte-identical configs from a seed, why determinism matters for reproducible load tests, and how the project verifies it."
+description: "How rConfig-sim generates byte-identical configs from a seed, why determinism matters for reproducible load tests, and how the project verifies it."
 sidebar:
   label: Determinism & seeds
   order: 4
 slug: generating-configs/determinism
 ---
 
-rcfg-sim's generator is **fully deterministic**: the same `--seed` produces byte-identical
+rConfig-sim's generator is **fully deterministic**: the same `--seed` produces byte-identical
 output every time, on any machine.
 
 ## Why it matters

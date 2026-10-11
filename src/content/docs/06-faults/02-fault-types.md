@@ -1,13 +1,13 @@
 ---
 title: "Fault types reference"
-description: "The four rcfg-sim fault types — auth_fail, disconnect_mid, slow_response, and malformed — and exactly what each one does to a session."
+description: "The four rConfig-sim fault types — auth_fail, disconnect_mid, slow_response, and malformed — and exactly what each one does to a session."
 sidebar:
   label: Fault types
   order: 2
 slug: faults/fault-types
 ---
 
-rcfg-sim supports four fault types, enabled by name via
+rConfig-sim supports four fault types, enabled by name via
 [`--fault-types`](/faults/overview/). Each fires per relevant event at the configured
 `--fault-rate`.
 

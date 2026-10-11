@@ -1,6 +1,6 @@
 ---
 title: "Network setup & IP aliases"
-description: "Create the IP aliases that rcfg-sim instances bind to, using the deploy/ip-aliases.sh helper, for high-density multi-IP simulation on a single host."
+description: "Create the IP aliases that rConfig-sim instances bind to, using the deploy/ip-aliases.sh helper, for high-density multi-IP simulation on a single host."
 sidebar:
   label: Network setup
   order: 4
@@ -8,7 +8,7 @@ slug: installation/network-setup
 ---
 
 A full 50k install presents **20 IPs × 2,500 ports**. Those IPs are ordinary aliases on a
-single interface — no extra NICs required. rcfg-sim ships an idempotent helper to manage them.
+single interface — no extra NICs required. rConfig-sim ships an idempotent helper to manage them.
 
 ## The address plan
 

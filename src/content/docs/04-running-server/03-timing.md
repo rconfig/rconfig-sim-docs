@@ -1,13 +1,13 @@
 ---
 title: "Response timing & jitter"
-description: "Tune per-command response latency in rcfg-sim with --response-delay-ms-min and --response-delay-ms-max to simulate realistic network device response times."
+description: "Tune per-command response latency in rConfig-sim with --response-delay-ms-min and --response-delay-ms-max to simulate realistic network device response times."
 sidebar:
   label: Response timing
   order: 3
 slug: running-server/timing
 ---
 
-Real devices don't answer instantly. rcfg-sim adds a configurable per-command delay so your
+Real devices don't answer instantly. rConfig-sim adds a configurable per-command delay so your
 tooling sees realistic latency — and so timeouts and concurrency behaviour get exercised.
 
 ## The delay flags

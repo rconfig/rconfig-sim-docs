@@ -1,6 +1,6 @@
 ---
-title: "rcfg-sim Quickstart"
-description: "Generate 100 simulated network devices, run the rcfg-sim SSH server on loopback, connect over SSH, and scrape Prometheus metrics in a few minutes."
+title: "rConfig-sim Quickstart"
+description: "Generate 100 simulated network devices, run the rConfig-sim SSH server on loopback, connect over SSH, and scrape Prometheus metrics in a few minutes."
 sidebar:
   label: Quickstart
   order: 2

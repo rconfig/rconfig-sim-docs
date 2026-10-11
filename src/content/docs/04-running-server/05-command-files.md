@@ -1,6 +1,6 @@
 ---
 title: "Command files"
-description: "The rcfg-sim --commands-root flag: answer any CLI command per device from a file you provide, with the folder layout, slug rule, caching and metrics explained."
+description: "The rConfig-sim --commands-root flag: answer any CLI command per device from a file you provide, with the folder layout, slug rule, caching and metrics explained."
 sidebar:
   label: Command files
   order: 5

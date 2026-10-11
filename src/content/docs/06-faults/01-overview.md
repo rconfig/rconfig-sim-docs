@@ -1,6 +1,6 @@
 ---
 title: "Fault injection overview"
-description: "How rcfg-sim injects realistic faults — auth failures, mid-stream disconnects, slow responses, and malformed output — to test how network tooling handles a misbehaving fleet."
+description: "How rConfig-sim injects realistic faults — auth failures, mid-stream disconnects, slow responses, and malformed output — to test how network tooling handles a misbehaving fleet."
 sidebar:
   label: Overview
   order: 1
@@ -8,7 +8,7 @@ slug: faults/overview
 ---
 
 A fleet of 50,000 devices is never perfectly healthy. Some refuse logins, some drop
-mid-transfer, some crawl, some return garbage. rcfg-sim can inject these faults on purpose so
+mid-transfer, some crawl, some return garbage. rConfig-sim can inject these faults on purpose so
 you can test how your tooling copes.
 
 ## Enabling faults

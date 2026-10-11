@@ -1,6 +1,6 @@
 ---
 title: "The manifest CSV format"
-description: "The rcfg-sim manifest CSV schema — the authoritative mapping of IP and port to config file, credentials, vendor, and driver that the SSH server reads."
+description: "The rConfig-sim manifest CSV schema — the authoritative mapping of IP and port to config file, credentials, vendor, and driver that the SSH server reads."
 sidebar:
   label: Manifest format
   order: 3
@@ -33,7 +33,7 @@ hostname,ip,port,vendor,template,username,password,enable_password,config_file,s
 | `size_bucket` | The [model/bucket](/generating-configs/size-buckets/) the device was generated from |
 
 :::caution[Public API]
-The manifest header and column order are part of rcfg-sim's stable surface. The `template`
+The manifest header and column order are part of rConfig-sim's stable surface. The `template`
 column is how the server selects a driver per device — see
 [`driverFor`](/drivers/overview/#how-a-driver-is-selected).
 :::

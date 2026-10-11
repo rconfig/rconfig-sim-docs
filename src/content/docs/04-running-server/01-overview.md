@@ -1,6 +1,6 @@
 ---
-title: "Running the rcfg-sim server"
-description: "How to run the rcfg-sim SSH server: binding a port range, pointing at a manifest, host keys, credentials, and the metrics endpoint."
+title: "Running the rConfig-sim server"
+description: "How to run the rConfig-sim SSH server: binding a port range, pointing at a manifest, host keys, credentials, and the metrics endpoint."
 sidebar:
   label: Overview
   order: 1

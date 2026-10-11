@@ -1,13 +1,13 @@
 ---
 title: "System install with systemd"
-description: "Install rcfg-sim as systemd template services with kernel tuning and file-descriptor limits, running one instance per IP alias for high-density operation."
+description: "Install rConfig-sim as systemd template services with kernel tuning and file-descriptor limits, running one instance per IP alias for high-density operation."
 sidebar:
   label: System install
   order: 3
 slug: installation/system-install
 ---
 
-For anything beyond a loopback trial you run rcfg-sim as **systemd template services** — one
+For anything beyond a loopback trial you run rConfig-sim as **systemd template services** — one
 instance per IP alias — with kernel and file-descriptor tuning applied. `make install`
 handles all of it.
 
@@ -29,7 +29,7 @@ A dedicated unprivileged service account (`rcfgsim`) runs the processes.
 
 :::caution[These paths are public API]
 Default paths (`/opt/rcfg-sim/`, `/etc/rcfg-sim/`, the host-key path) and the unit name
-`rcfg-sim@<IP>.service` are part of rcfg-sim's stable surface. See the
+`rcfg-sim@<IP>.service` are part of rConfig-sim's stable surface. See the
 [Reference → paths](/reference/paths/).
 :::
 

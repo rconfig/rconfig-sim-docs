@@ -1,13 +1,13 @@
 ---
 title: "Writing a new driver"
-description: "How to add a new vendor personality to rcfg-sim: implement the Driver interface, register it, add a generator template, and keep metrics and faults uniform."
+description: "How to add a new vendor personality to rConfig-sim: implement the Driver interface, register it, add a generator template, and keep metrics and faults uniform."
 sidebar:
   label: Writing a new driver
   order: 6
 slug: drivers/writing-a-driver
 ---
 
-Adding a vendor to rcfg-sim is intentionally small: **one runtime file** for the driver and
+Adding a vendor to rConfig-sim is intentionally small: **one runtime file** for the driver and
 **one template plus a registry entry** for the generator. Nothing in the hot path needs to
 know your vendor exists.
 

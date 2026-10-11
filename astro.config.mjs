@@ -144,8 +144,8 @@ export default defineConfig({
 	integrations: [
 		sitemap(),
 		starlight({
-			title: "rcfg-sim",
-			description: "rcfg-sim is an open-source, high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration tooling at 50,000+ devices on a single host.",
+			title: "rConfig-sim",
+			description: "rConfig-sim is an open-source, high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration tooling at 50,000+ devices on a single host.",
 			disable404Route: false,
 			customCss: ["./src/assets/css/tailwind.css", "./src/assets/css/custom.css"],
 			favicon: "/favicon.svg",

@@ -1,13 +1,13 @@
 ---
 title: "Prometheus metrics reference"
-description: "Complete reference for every Prometheus metric rcfg-sim exposes: names, types, labels, and histogram buckets — all treated as a stable public API."
+description: "Complete reference for every Prometheus metric rConfig-sim exposes: names, types, labels, and histogram buckets — all treated as a stable public API."
 sidebar:
   label: Metrics reference
   order: 2
 slug: metrics/reference
 ---
 
-Every metric rcfg-sim exposes, with its labels and buckets. Metric names and label keys are
+Every metric rConfig-sim exposes, with its labels and buckets. Metric names and label keys are
 **public API** — see [versioning & scope](/contributing/scope/).
 
 ## Metrics

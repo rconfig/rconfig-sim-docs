@@ -1,6 +1,6 @@
 ---
 title: "Cisco IOS driver — worked examples"
-description: "Complete worked rcfg-sim Cisco IOS sessions: full SSH transcripts with real show version, show running-config, and show inventory output, plus bash, expect, and Python (Netmiko/Paramiko) automation."
+description: "Complete worked rConfig-sim Cisco IOS sessions: full SSH transcripts with real show version, show running-config, and show inventory output, plus bash, expect, and Python (Netmiko/Paramiko) automation."
 sidebar:
   label: Cisco IOS examples
   order: 3

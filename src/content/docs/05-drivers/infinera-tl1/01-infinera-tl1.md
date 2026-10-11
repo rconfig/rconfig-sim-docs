@@ -1,6 +1,6 @@
 ---
 title: "Infinera DTN-X TL1 driver"
-description: "The rcfg-sim infinera_tl1 driver: TL1 over SSH for the Infinera DTN-X, with paged RTRV-TIDMAP responses and routed replies that carry the system name."
+description: "The rConfig-sim infinera_tl1 driver: TL1 over SSH for the Infinera DTN-X, with paged RTRV-TIDMAP responses and routed replies that carry the system name."
 sidebar:
   label: Infinera TL1 driver
   order: 6

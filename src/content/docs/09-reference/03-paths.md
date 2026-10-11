@@ -1,6 +1,6 @@
 ---
 title: "Default paths & systemd units"
-description: "Reference for rcfg-sim default filesystem paths, the systemd template unit name, and per-instance environment files — all part of the stable public surface."
+description: "Reference for rConfig-sim default filesystem paths, the systemd template unit name, and per-instance environment files — all part of the stable public surface."
 sidebar:
   label: Default paths
   order: 3

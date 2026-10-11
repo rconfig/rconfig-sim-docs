@@ -1,13 +1,13 @@
 ---
-title: "Building rcfg-sim from source"
-description: "Clone the repository and build the rcfg-sim and rcfg-sim-gen binaries with make, plus the available Makefile targets for testing and benchmarking."
+title: "Building rConfig-sim from source"
+description: "Clone the repository and build the rConfig-sim and rcfg-sim-gen binaries with make, plus the available Makefile targets for testing and benchmarking."
 sidebar:
   label: Build from source
   order: 2
 slug: installation/build
 ---
 
-rcfg-sim is built with `make`. There are no code-generation steps and no external build
+rConfig-sim is built with `make`. There are no code-generation steps and no external build
 tools beyond the Go toolchain.
 
 ## Clone and build

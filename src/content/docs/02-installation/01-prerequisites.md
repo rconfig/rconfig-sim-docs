@@ -1,6 +1,6 @@
 ---
 title: "Prerequisites & system requirements"
-description: "Hardware, OS, and network requirements for running the rcfg-sim SSH simulator, from a laptop trial to a full 50,000-device host."
+description: "Hardware, OS, and network requirements for running the rConfig-sim SSH simulator, from a laptop trial to a full 50,000-device host."
 sidebar:
   label: Prerequisites
   order: 1

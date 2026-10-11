@@ -1,11 +1,11 @@
 ---
-title: rcfg-sim — high-density network device SSH simulator
-description: rcfg-sim is an open-source Cisco IOS and multi-vendor SSH simulator that stands up 50,000+ realistic network devices on a single host for load-testing network automation and configuration tooling.
+title: rConfig-sim. High-density network device SSH simulator
+description: rConfig-sim is an open-source Cisco IOS and multi-vendor SSH simulator that stands up 50,000+ realistic network devices on a single host for load-testing network automation and configuration tooling.
 template: splash
 hero:
   tagline: Stand up 50,000+ realistic SSH-speaking network devices on a single host. Load-test your automation at production scale — without a warehouse of hardware.
   image:
-    dark: ../../assets/sim-logo-white.svg
+    dark: ../../assets/sim-logo-gradient.svg
     light: ../../assets/sim-logo-gradient.svg
     alt: Sim by rConfig — the network device SSH simulator
   actions:
@@ -25,7 +25,7 @@ head:
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "rcfg-sim",
+        "name": "rConfig-sim",
         "description": "Open-source high-density Cisco IOS and multi-vendor SSH simulator for load-testing network automation and configuration management tooling at 50,000+ devices on a single host.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux",
@@ -42,9 +42,9 @@ head:
 
 import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-## What is rcfg-sim?
+## What is rConfig-sim?
 
-**rcfg-sim** is a high-density SSH simulator for network devices. A single commodity host
+**rConfig-sim** is a high-density SSH simulator for network devices. A single commodity host
 hosts **50,000+ concurrent SSH listeners** — each one speaking real SSH, presenting a
 realistic Cisco IOS (or Ciena TL1) personality, and streaming a multi-KB to multi-MB
 running-config on demand. It exists so you can answer scaling questions about network
@@ -81,7 +81,7 @@ libraries.
 Real-world network fleets span 100 to 50,000+ devices. Bugs that only appear at 50k scale —
 scheduler fairness, burst handling, diff-engine scaling, retry storms, resource envelopes —
 never show up against a handful of lab devices. The alternatives are buying ~$2M of hardware
-or burning a datacentre on VM emulation. rcfg-sim delivers the same production-shaped load
+or burning a datacentre on VM emulation. rConfig-sim delivers the same production-shaped load
 from one box.
 
 ## Start here
@@ -95,8 +95,8 @@ from one box.
 
 ## Built by the rConfig team
 
-rcfg-sim is maintained by the team behind [rConfig](https://www.rconfig.com), a
+rConfig-sim is maintained by the team behind [rConfig](https://www.rconfig.com), a
 network configuration management platform. It was built to load-test rConfig itself, and is
 released as a standalone open-source tool that works with **any** SSH-based automation or
-NCM system. See [Using rcfg-sim with rConfig](/examples/using-with-rconfig/) for how the two
+NCM system. See [Using rConfig-sim with rConfig](/examples/using-with-rconfig/) for how the two
 fit together.

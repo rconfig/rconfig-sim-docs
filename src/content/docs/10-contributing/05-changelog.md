@@ -1,6 +1,6 @@
 ---
 title: "Changelog & releases"
-description: "A summary of rcfg-sim releases and where to find the full changelog and release notes for the open-source network SSH simulator."
+description: "A summary of rConfig-sim releases and where to find the full changelog and release notes for the open-source network SSH simulator."
 sidebar:
   label: Changelog
   order: 5
@@ -41,7 +41,7 @@ see [Scope & versioning](/contributing/scope/) for the policy behind the version
 
 ## Versioning policy
 
-rcfg-sim is **pre-1.0**: every release is currently a patch bump, and breaking changes are
+rConfig-sim is **pre-1.0**: every release is currently a patch bump, and breaking changes are
 allowed at any patch bump while documented under a `### Breaking` heading. See
 [Scope & versioning](/contributing/scope/) for the full policy and the breaking-change
 surface.

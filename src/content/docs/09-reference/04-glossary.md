@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-description: "Definitions of key rcfg-sim terms — driver, model, size bucket, manifest, fault injection, mmap zero-copy, and TL1 — for the network device SSH simulator."
+description: "Definitions of key rConfig-sim terms — driver, model, size bucket, manifest, fault injection, mmap zero-copy, and TL1 — for the network device SSH simulator."
 sidebar:
   label: Glossary
   order: 4
@@ -50,12 +50,12 @@ See [Architecture](/getting-started/concepts/).
 the [`--distribution`](/generating-configs/size-buckets/) key and the manifest `size_bucket`
 value.
 
-**NCM** — network configuration management; the class of tooling rcfg-sim is built to
+**NCM** — network configuration management; the class of tooling rConfig-sim is built to
 load-test. See [Using with rConfig](/examples/using-with-rconfig/).
 
 **rcfg-sim-gen** — the config generator binary.
 
-**rcfg-sim** — the SSH server binary.
+**rConfig-sim** — the SSH server binary.
 
 **Paged response** — a TL1 answer split across several blocks, every one but the last coded
 `RTRV` rather than `COMPLD`, with the prompt written between them. A client that reads to the

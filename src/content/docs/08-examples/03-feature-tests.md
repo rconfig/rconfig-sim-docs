@@ -1,6 +1,6 @@
 ---
 title: "Feature verification"
-description: "How to verify specific rcfg-sim behaviours by hand — generator determinism, command dispatch, enable mode, graceful shutdown, metrics, and fault injection."
+description: "How to verify specific rConfig-sim behaviours by hand — generator determinism, command dispatch, enable mode, graceful shutdown, metrics, and fault injection."
 sidebar:
   label: Feature verification
   order: 3

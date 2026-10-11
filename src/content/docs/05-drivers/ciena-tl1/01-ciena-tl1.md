@@ -1,6 +1,6 @@
 ---
 title: "Ciena 6500 TL1 driver"
-description: "The rcfg-sim ciena_tl1 driver: TL1 over SSH for the Ciena 6500 optical platform, with ACT-USER in-band login and RTRV-* retrieval commands."
+description: "The rConfig-sim ciena_tl1 driver: TL1 over SSH for the Ciena 6500 optical platform, with ACT-USER in-band login and RTRV-* retrieval commands."
 sidebar:
   label: Ciena TL1 driver
   order: 4

@@ -1,6 +1,6 @@
 ---
 title: "Scope & versioning"
-description: "What is in and out of scope for rcfg-sim, the public-API surface that constitutes a breaking change, and the project's pre-1.0 SemVer policy."
+description: "What is in and out of scope for rConfig-sim, the public-API surface that constitutes a breaking change, and the project's pre-1.0 SemVer policy."
 sidebar:
   label: Scope & versioning
   order: 3

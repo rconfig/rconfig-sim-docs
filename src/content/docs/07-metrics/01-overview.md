@@ -1,13 +1,13 @@
 ---
 title: "Metrics & observability overview"
-description: "How rcfg-sim exposes Prometheus metrics with bounded cardinality, the /metrics and /healthz endpoints, and what to watch under load."
+description: "How rConfig-sim exposes Prometheus metrics with bounded cardinality, the /metrics and /healthz endpoints, and what to watch under load."
 sidebar:
   label: Overview
   order: 1
 slug: metrics/overview
 ---
 
-rcfg-sim is built to be observed under load. Each server instance exposes Prometheus metrics
+rConfig-sim is built to be observed under load. Each server instance exposes Prometheus metrics
 and a health endpoint over HTTP.
 
 ## The endpoints

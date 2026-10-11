@@ -1,6 +1,6 @@
 ---
 title: "SSH authentication modes"
-description: "The rcfg-sim --ssh-auth flag: password, driver, and none modes for mixed-vendor fleets where some devices authenticate at the SSH transport and others in-band."
+description: "The rConfig-sim --ssh-auth flag: password, driver, and none modes for mixed-vendor fleets where some devices authenticate at the SSH transport and others in-band."
 sidebar:
   label: SSH auth modes
   order: 2

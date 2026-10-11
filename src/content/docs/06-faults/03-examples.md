@@ -1,6 +1,6 @@
 ---
 title: "Fault injection examples"
-description: "Practical rcfg-sim fault injection recipes for testing authentication retries, partial transfers, timeouts, and parser robustness in network tooling."
+description: "Practical rConfig-sim fault injection recipes for testing authentication retries, partial transfers, timeouts, and parser robustness in network tooling."
 sidebar:
   label: Examples
   order: 3

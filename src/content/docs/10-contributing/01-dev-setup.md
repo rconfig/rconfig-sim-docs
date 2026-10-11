@@ -1,13 +1,13 @@
 ---
 title: "Development setup"
-description: "How to set up a development environment for rcfg-sim and run the pre-merge gate: go fmt, go vet, unit tests, integration tests, and benchmarks."
+description: "How to set up a development environment for rConfig-sim and run the pre-merge gate: go fmt, go vet, unit tests, integration tests, and benchmarks."
 sidebar:
   label: Development setup
   order: 1
 slug: contributing/dev-setup
 ---
 
-rcfg-sim is open source (MIT) and contributions are welcome. This page covers the local
+rConfig-sim is open source (MIT) and contributions are welcome. This page covers the local
 workflow; read [Scope & versioning](/contributing/scope/) before proposing changes that touch
 user-facing surfaces.
 

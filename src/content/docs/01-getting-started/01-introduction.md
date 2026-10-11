@@ -1,13 +1,13 @@
 ---
-title: "Introduction to rcfg-sim"
-description: "What the rcfg-sim network SSH simulator does, who it is for, and how it differs from emulators like GNS3 and EVE-NG."
+title: "Introduction to rConfig-sim"
+description: "What the rConfig-sim network SSH simulator does, who it is for, and how it differs from emulators like GNS3 and EVE-NG."
 sidebar:
   label: Introduction
   order: 1
 slug: getting-started/introduction
 ---
 
-**rcfg-sim** is a high-density SSH simulator for network devices. One Linux host stands up
+**rConfig-sim** is a high-density SSH simulator for network devices. One Linux host stands up
 **50,000+ concurrent SSH listeners**, each speaking real SSH and presenting a realistic
 device personality (Cisco IOS or Ciena 6500 TL1) that streams a generated running-config on
 demand.
@@ -29,7 +29,7 @@ failures that matter at that scale rarely reproduce in a small lab:
 
 You cannot answer these with unit tests or a 50-device lab. The usual alternatives are
 expensive: roughly **$2M of physical hardware**, or full-system VM emulation that melts a
-datacentre. rcfg-sim gives you production-shaped load from a single commodity host
+datacentre. rConfig-sim gives you production-shaped load from a single commodity host
 (a 12 vCPU / 48 GB box comfortably drives the full 50k).
 
 ## What it is
@@ -56,6 +56,6 @@ datacentre. rcfg-sim gives you production-shaped load from a single commodity ho
 Anyone building or operating SSH-based network tooling: NCM platforms, backup/collection
 systems, automation frameworks, and the CI rigs that test them. It is maintained by the
 [rConfig](https://www.rconfig.com) team and works with any SSH-based system — see
-[Using rcfg-sim with rConfig](/examples/using-with-rconfig/).
+[Using rConfig-sim with rConfig](/examples/using-with-rconfig/).
 
 Ready to try it? Head to the [Quickstart](/getting-started/quickstart/).

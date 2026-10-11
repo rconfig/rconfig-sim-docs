@@ -1,6 +1,6 @@
 ---
 title: "Load-test scenarios"
-description: "A progressive ladder of rcfg-sim load-test scenarios, from a 100-device smoke test up to a full 50,000-device fleet, for validating network automation at scale."
+description: "A progressive ladder of rConfig-sim load-test scenarios, from a 100-device smoke test up to a full 50,000-device fleet, for validating network automation at scale."
 sidebar:
   label: Load-test scenarios
   order: 2

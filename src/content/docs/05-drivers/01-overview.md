@@ -1,6 +1,6 @@
 ---
 title: "The driver framework"
-description: "How rcfg-sim's pluggable multi-vendor driver framework works — the Driver interface, registry, per-device selection, and shared response machinery."
+description: "How rConfig-sim's pluggable multi-vendor driver framework works — the Driver interface, registry, per-device selection, and shared response machinery."
 sidebar:
   label: Overview
   order: 1
@@ -8,7 +8,7 @@ slug: drivers/overview
 ---
 
 A **driver** is a vendor personality. It owns the full interactive loop for one device:
-reading input, parsing commands, and writing responses. rcfg-sim ships five:
+reading input, parsing commands, and writing responses. rConfig-sim ships five:
 [`cisco_ios`](/drivers/cisco-ios/), [`junos`](/drivers/junos/), [`ciena_tl1`](/drivers/ciena-tl1/),
 [`infinera_tl1`](/drivers/infinera-tl1/) and [`cisco_ons_tl1`](/drivers/cisco-ons-tl1/). Adding more
 is deliberately a one-file job.

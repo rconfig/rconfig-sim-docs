@@ -1,6 +1,6 @@
 ---
 title: "Juniper Junos driver"
-description: "The rcfg-sim junos driver: a minimal Juniper Junos operational-mode CLI with user@host prompt, silent screen-length, show configuration, and Junos-style errors."
+description: "The rConfig-sim junos driver: a minimal Juniper Junos operational-mode CLI with user@host prompt, silent screen-length, show configuration, and Junos-style errors."
 sidebar:
   label: Juniper Junos driver
   order: 2

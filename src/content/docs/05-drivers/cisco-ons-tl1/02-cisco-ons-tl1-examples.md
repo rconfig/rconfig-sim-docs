@@ -1,6 +1,6 @@
 ---
 title: "Cisco ONS TL1 examples"
-description: "Worked rcfg-sim sessions against the cisco_ons_tl1 driver: reading positional RTRV-MAP-NETWORK records, dropping the gateway's own row, and handling UNKNOWN products."
+description: "Worked rConfig-sim sessions against the cisco_ons_tl1 driver: reading positional RTRV-MAP-NETWORK records, dropping the gateway's own row, and handling UNKNOWN products."
 sidebar:
   label: Cisco ONS TL1 examples
   order: 9

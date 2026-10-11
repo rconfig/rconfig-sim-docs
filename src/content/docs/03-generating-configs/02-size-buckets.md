@@ -1,6 +1,6 @@
 ---
 title: "Size buckets & the distribution flag"
-description: "The rcfg-sim config size buckets (sm through 6xl plus the optical TL1 models) and how the --distribution flag controls the mix of config sizes across a simulated fleet."
+description: "The rConfig-sim config size buckets (sm through 6xl plus the optical TL1 models) and how the --distribution flag controls the mix of config sizes across a simulated fleet."
 sidebar:
   label: Size buckets & distribution
   order: 2

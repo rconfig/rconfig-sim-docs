@@ -1,13 +1,13 @@
 ---
 title: "Commit conventions"
-description: "Conventional Commits style used by rcfg-sim: allowed types, subject formatting, and how breaking changes are flagged in commit messages."
+description: "Conventional Commits style used by rConfig-sim: allowed types, subject formatting, and how breaking changes are flagged in commit messages."
 sidebar:
   label: Commit conventions
   order: 2
 slug: contributing/commit-conventions
 ---
 
-rcfg-sim uses [Conventional Commits](https://www.conventionalcommits.org/). Consistent commit
+rConfig-sim uses [Conventional Commits](https://www.conventionalcommits.org/). Consistent commit
 messages drive the changelog and make the version bump obvious.
 
 ## Format

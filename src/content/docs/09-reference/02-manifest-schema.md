@@ -1,6 +1,6 @@
 ---
 title: "Manifest schema reference"
-description: "The exact column order and meaning of the rcfg-sim manifest CSV that maps simulated devices to their configs, credentials, vendor, and driver."
+description: "The exact column order and meaning of the rConfig-sim manifest CSV that maps simulated devices to their configs, credentials, vendor, and driver."
 sidebar:
   label: Manifest schema
   order: 2

@@ -1,13 +1,13 @@
 ---
 title: "Architecture & core concepts"
-description: "How rcfg-sim sustains 50,000 SSH listeners on one host: mmap zero-copy config delivery, pluggable per-device drivers, deterministic generation, and the two-binary model."
+description: "How rConfig-sim sustains 50,000 SSH listeners on one host: mmap zero-copy config delivery, pluggable per-device drivers, deterministic generation, and the two-binary model."
 sidebar:
   label: Architecture & concepts
   order: 3
 slug: getting-started/concepts
 ---
 
-rcfg-sim is two binaries and a handful of ideas. Understanding them makes the rest of the
+rConfig-sim is two binaries and a handful of ideas. Understanding them makes the rest of the
 docs straightforward.
 
 ## The two binaries

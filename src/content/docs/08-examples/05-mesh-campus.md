@@ -1,6 +1,6 @@
 ---
 title: "Mesh campus scenario"
-description: "The rcfg-sim mesh-campus scenario: three simulated devices (Arista EOS, Juniper Junos, Cisco IOS) with LLDP/CDP neighbours that agree end to end, for topology discovery testing."
+description: "The rConfig-sim mesh-campus scenario: three simulated devices (Arista EOS, Juniper Junos, Cisco IOS) with LLDP/CDP neighbours that agree end to end, for topology discovery testing."
 sidebar:
   label: Mesh campus scenario
   order: 5

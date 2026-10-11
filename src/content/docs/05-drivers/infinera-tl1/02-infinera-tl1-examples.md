@@ -1,6 +1,6 @@
 ---
 title: "Infinera TL1 examples"
-description: "Worked rcfg-sim sessions against the infinera_tl1 driver: a paged RTRV-TIDMAP walk, routed collection by TID, and a Python client that reads a whole paged response."
+description: "Worked rConfig-sim sessions against the infinera_tl1 driver: a paged RTRV-TIDMAP walk, routed collection by TID, and a Python client that reads a whole paged response."
 sidebar:
   label: Infinera TL1 examples
   order: 7

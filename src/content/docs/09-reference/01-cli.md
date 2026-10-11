@@ -1,6 +1,6 @@
 ---
 title: "CLI reference"
-description: "Complete command-line reference for both rcfg-sim binaries — every flag, default, and description for the rcfg-sim server and the rcfg-sim-gen generator."
+description: "Complete command-line reference for both rConfig-sim binaries — every flag, default, and description for the rConfig-sim server and the rcfg-sim-gen generator."
 sidebar:
   label: CLI reference
   order: 1

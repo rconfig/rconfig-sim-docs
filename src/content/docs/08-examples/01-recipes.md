@@ -1,6 +1,6 @@
 ---
 title: "Quickstart recipes"
-description: "Copy-paste rcfg-sim recipes: a single device, a small mixed-vendor fleet, a high-throughput benchmark setup, and a Ciena-only optical fleet."
+description: "Copy-paste rConfig-sim recipes: a single device, a small mixed-vendor fleet, a high-throughput benchmark setup, and a Ciena-only optical fleet."
 sidebar:
   label: Quickstart recipes
   order: 1

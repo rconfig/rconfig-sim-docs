@@ -1,6 +1,6 @@
 ---
 title: "Ciena 6500 TL1 driver — worked examples"
-description: "Complete worked rcfg-sim Ciena 6500 TL1 sessions over SSH: the ACT-USER login gate, RTRV-EQPT/ALM/COND/SYS responses with real COMPLD and DENY blocks, and Python automation."
+description: "Complete worked rConfig-sim Ciena 6500 TL1 sessions over SSH: the ACT-USER login gate, RTRV-EQPT/ALM/COND/SYS responses with real COMPLD and DENY blocks, and Python automation."
 sidebar:
   label: Ciena TL1 examples
   order: 5
@@ -334,7 +334,7 @@ Running with `--ssh-auth driver` is what makes a mixed fleet realistic: Cisco de
 challenge for an SSH password while Ciena devices accept the connection and rely on
 `ACT-USER`. This is the configuration to use when testing whether your tooling correctly
 handles **both** auth models — see [SSH auth modes](/running-server/ssh-auth/) and
-[Using rcfg-sim with rConfig](/examples/using-with-rconfig/).
+[Using rConfig-sim with rConfig](/examples/using-with-rconfig/).
 
 ## See also
 

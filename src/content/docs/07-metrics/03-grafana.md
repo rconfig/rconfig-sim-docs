@@ -1,13 +1,13 @@
 ---
 title: "Grafana query recipes"
-description: "Ready-to-use PromQL queries for monitoring rcfg-sim under load — session throughput, error rate, command latency percentiles, and throughput in bits per second."
+description: "Ready-to-use PromQL queries for monitoring rConfig-sim under load — session throughput, error rate, command latency percentiles, and throughput in bits per second."
 sidebar:
   label: Grafana queries
   order: 3
 slug: metrics/grafana
 ---
 
-PromQL expressions for the dashboards you'll want when driving rcfg-sim hard. Point
+PromQL expressions for the dashboards you'll want when driving rConfig-sim hard. Point
 Prometheus at each instance's [`/metrics`](/metrics/overview/) endpoint first.
 
 ## Session throughput
