@@ -5,17 +5,20 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 @theme {
-  --color-accent-50: var(--color-indigo-50);
-  --color-accent-100: var(--color-indigo-100);
-  --color-accent-200: var(--color-indigo-200);
-  --color-accent-300: var(--color-indigo-300);
-  --color-accent-400: var(--color-indigo-400);
-  --color-accent-500: var(--color-indigo-500);
-  --color-accent-600: var(--color-indigo-600);
-  --color-accent-700: var(--color-indigo-700);
-  --color-accent-800: var(--color-indigo-800);
-  --color-accent-900: var(--color-indigo-900);
-  --color-accent-950: var(--color-indigo-950);
+  /* rConfig Sim "Copper" brand scale (Brand Guidelines 2026): 700 #8C4220,
+     500 #CC7A5C and 200 #F2C6A2 are the gradient stops. 600 clears AA with white
+     text (5.2:1) for buttons; 700 is 7.2:1 on white for light-mode links. */
+  --color-accent-50: #fbf4ef;
+  --color-accent-100: #f6e5da;
+  --color-accent-200: #f2c6a2;
+  --color-accent-300: #e8a27f;
+  --color-accent-400: #d98b69;
+  --color-accent-500: #cc7a5c;
+  --color-accent-600: #a8562f;
+  --color-accent-700: #8c4220;
+  --color-accent-800: #6e3317;
+  --color-accent-900: #4f2511;
+  --color-accent-950: #2e1509;
 
   --color-gray-50: var(--color-zinc-50);
   --color-gray-100: var(--color-zinc-100);
@@ -66,11 +69,11 @@
   --sl-color-bg: #1b1d21;
   --sl-color-bg-nav: #24262a;
   --sl-color-bg-sidebar: #24262a;
-  --sl-color-bg-inline-code: #18181b;
+  --sl-color-bg-inline-code: #1c1612;
 }
 
 :root[data-theme="dark"] code:not(pre code) {
-  background-color: #3f3f46 !important;
+  background-color: #33261e !important;
   color: #e2e8f0 !important; /* Light gray text */
   padding: 0.125rem 0.25rem !important;
   border-radius: 0.25rem !important;
@@ -79,7 +82,7 @@
 
 /* Also fix it for light theme to ensure consistency */
 :root[data-theme="light"] code:not(pre code) {
-  background-color: #e4e4e7 !important;
+  background-color: #f6e5da !important;
   color: #334155 !important;
   padding: 0.125rem 0.25rem !important;
   border-radius: 0.25rem !important;

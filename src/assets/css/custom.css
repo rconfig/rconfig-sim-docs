@@ -1,3 +1,38 @@
+/* rConfig Sim branding: Sora headings, Plus Jakarta Sans body (the rConfig brand
+   typefaces), the Copper accent scale from tailwind.css. Dark stays the default
+   look; only the accent, type and brand details change. */
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/sora";
+
+:root {
+  --sl-font: "Plus Jakarta Sans Variable", system-ui, sans-serif;
+  --sl-font-heading: "Sora Variable", "Plus Jakarta Sans Variable", system-ui, sans-serif;
+  --sim-copper-1: #8c4220;
+  --sim-copper-2: #cc7a5c;
+  --sim-copper-3: #f2c6a2;
+}
+h1, h2, h3, h4, .site-title, .sl-markdown-content :is(h1, h2, h3, h4) {
+  font-family: var(--sl-font-heading);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Copper gradient hairline across the top of the header, the brand's signature. */
+header.header {
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--sim-copper-1), var(--sim-copper-2), var(--sim-copper-3)) 1;
+}
+
+:root[data-theme="dark"] {
+  --sl-color-accent-high: #f2c6a2;
+}
+::selection {
+  background: color-mix(in srgb, var(--sim-copper-2) 35%, transparent);
+}
+:root[data-theme="dark"] .hero img {
+  filter: drop-shadow(0 12px 40px rgba(204, 122, 92, 0.28));
+}
+
 /* Target the first h1#_top that's NOT in the hero section */
 h1#_top:not([data-page-title]) {
     display: none;
