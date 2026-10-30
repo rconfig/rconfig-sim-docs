@@ -1,0 +1,1008 @@
+/*
+ * Homepage (index.mdx): hero override and body sections.
+ *
+ * Same layout and rules as the rConfig docs homepage (docs.rconfig.com), in the
+ * Sim brand: the neutral page palette (#1b1d21 page, #24262a chrome, or white)
+ * with the Copper gradient (#8C4220, #CC7A5C, #F2C6A2) used sparingly for icons,
+ * links, the primary action, the driver cards and focus or hover states.
+ * Copper 600 (#A8562F) carries white text at 5.2:1; Copper 700 (#8C4220) is the
+ * light-mode link colour at 7.2:1. Headlines Sora, body Plus Jakarta Sans.
+ * Only loaded on the homepage.
+ */
+
+:root {
+	--rc-copper: #a8562f;
+	--rc-copper-hover: #8c4220;
+	--rc-copper-gradient: linear-gradient(135deg, #8c4220 0%, #cc7a5c 55%, #f2c6a2 100%);
+	--rc-font: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+	--rc-font-display: "Sora Variable", "Sora", var(--rc-font);
+	--rc-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--rc-max: 1200px;
+}
+
+:root,
+:root[data-theme="light"] {
+	--rc-bg: #ffffff;
+	--rc-surface: #ffffff;
+	--rc-surface-2: #f5f6f8;
+	--rc-border: #e4e6eb;
+	--rc-border-strong: #d0d3da;
+	--rc-text: #111318;
+	--rc-text-2: #464a55;
+	--rc-text-3: #737783;
+	--rc-accent: #a8562f;
+	--rc-link: #8c4220;
+	--rc-accent-soft: rgb(204 122 92 / 0.12);
+	--rc-glow: rgb(204 122 92 / 0.12);
+	--rc-grid: rgb(140 66 32 / 0.07);
+	--rc-mark-opacity: 0.09;
+	/* Light hero: a warm tint so it reads as a distinct band against the white page. */
+	--rc-hero-bg:
+		radial-gradient(55% 75% at 80% 25%, rgb(204 122 92 / 0.22), transparent 70%),
+		radial-gradient(40% 60% at 5% 100%, rgb(140 66 32 / 0.07), transparent 70%),
+		linear-gradient(180deg, #fbf3ed 0%, #fdf9f6 100%);
+	--rc-shadow: 0 1px 2px rgb(17 19 24 / 0.04), 0 10px 28px -16px rgb(17 19 24 / 0.18);
+	--rc-shadow-lg: 0 20px 48px -24px rgb(17 19 24 / 0.28);
+}
+
+:root[data-theme="dark"] {
+	--rc-bg: #1b1d21;
+	--rc-surface: #24262a;
+	--rc-surface-2: #2a2d32;
+	--rc-border: #33363c;
+	--rc-border-strong: #43464d;
+	--rc-text: #eceef2;
+	--rc-text-2: #b4b7bf;
+	--rc-text-3: #868a94;
+	--rc-accent: #e8a27f;
+	--rc-link: #f2c6a2;
+	--rc-accent-soft: rgb(232 162 127 / 0.13);
+	--rc-glow: rgb(204 122 92 / 0.17);
+	--rc-grid: rgb(255 255 255 / 0.04);
+	--rc-mark-opacity: 0.05;
+	--rc-hero-bg:
+		radial-gradient(60% 70% at 78% 30%, var(--rc-glow), transparent 70%),
+		var(--rc-bg);
+	--rc-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px -16px rgb(0 0 0 / 0.55);
+	--rc-shadow-lg: 0 20px 48px -24px rgb(0 0 0 / 0.75);
+}
+
+/* ---------- Page frame ---------- */
+
+/* The hero runs edge to edge; clip the 100vw bleed. */
+[data-has-hero] body {
+	overflow-x: clip;
+}
+
+[data-has-hero] .content-panel {
+	padding-top: 0;
+}
+
+[data-has-hero] .content-panel .sl-container {
+	max-width: var(--rc-max);
+}
+
+/* ---------- Hero ---------- */
+
+/* Same colour as the page and header; a single soft Copper glow is the only tint. */
+.rc-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	margin-inline: calc(50% - 50vw);
+	color: var(--rc-text);
+	font-family: var(--rc-font);
+	background: var(--rc-hero-bg);
+	border-bottom: 1px solid var(--rc-border);
+}
+
+/* Network grid texture, faded towards the edges. */
+.rc-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background-image:
+		linear-gradient(var(--rc-grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--rc-grid) 1px, transparent 1px);
+	background-size: 48px 48px;
+	mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%);
+	-webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 40%, #000 20%, transparent 75%);
+}
+
+.rc-hero__mark {
+	position: absolute;
+	z-index: -1;
+	right: max(-60px, calc((100vw - var(--rc-max)) / 2 - 40px));
+	top: 50%;
+	height: 118%;
+	width: auto;
+	transform: translateY(-46%);
+	opacity: var(--rc-mark-opacity);
+	pointer-events: none;
+	mask-image: linear-gradient(180deg, #000 45%, transparent 90%);
+	-webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 90%);
+}
+
+:root[data-theme="dark"] .rc-hero__mark--light,
+:root:not([data-theme="dark"]) .rc-hero__mark--dark {
+	display: none;
+}
+
+@media (max-width: 50rem) {
+	.rc-hero__mark {
+		right: -120px;
+	}
+}
+
+.rc-hero__inner {
+	max-width: var(--rc-max);
+	margin: 0 auto;
+	padding: clamp(3.5rem, 9vw, 6.5rem) var(--sl-content-pad-x) clamp(3.5rem, 8vw, 5.5rem);
+}
+
+.rc-hero__eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin: 0 0 1.25rem;
+	padding: 0.35rem 0.85rem;
+	border-radius: 999px;
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface);
+	color: var(--rc-text-2);
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	text-decoration: none;
+	transition: border-color 0.2s;
+}
+
+.rc-hero__eyebrow:hover {
+	border-color: var(--rc-border-strong);
+	color: var(--rc-text);
+}
+
+.rc-hero__eyebrow svg {
+	transition: transform 0.2s var(--rc-ease);
+}
+
+.rc-hero__eyebrow:hover svg {
+	transform: translateX(3px);
+}
+
+.rc-hero__eyebrow-dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--rc-accent);
+	box-shadow: 0 0 0 4px var(--rc-accent-soft);
+}
+
+.rc-hero h1 {
+	max-width: 15ch;
+	margin: 0;
+	color: var(--rc-text);
+	font-family: var(--rc-font-display);
+	font-weight: 400;
+	font-size: clamp(2.6rem, 6.2vw, 4.75rem);
+	line-height: 1.02;
+	letter-spacing: -0.035em;
+}
+
+.rc-hero__lead {
+	max-width: 56ch;
+	margin: 1.5rem 0 0;
+	font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+	line-height: 1.6;
+	color: var(--rc-text-2);
+}
+
+.rc-hero__search {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	width: min(560px, 100%);
+	height: 58px;
+	margin-top: 2.25rem;
+	padding: 0 0.85rem 0 1.15rem;
+	border-radius: 14px;
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface);
+	box-shadow: var(--rc-shadow);
+	color: var(--rc-text-3);
+	font: inherit;
+	font-size: 1rem;
+	cursor: pointer;
+	transition:
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.rc-hero__search:hover {
+	border-color: var(--rc-accent);
+	box-shadow:
+		0 0 0 3px var(--rc-accent-soft),
+		var(--rc-shadow);
+}
+
+.rc-hero__search kbd {
+	margin-left: auto;
+	padding: 0.15rem 0.45rem;
+	border-radius: 6px;
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface-2);
+	color: var(--rc-text-3);
+	font-family: inherit;
+	font-size: 0.75rem;
+	font-weight: 600;
+}
+
+.rc-hero__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+.rc-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	height: 46px;
+	padding: 0 1.2rem;
+	border-radius: 12px;
+	border: 1px solid transparent;
+	font-weight: 700;
+	font-size: 0.95rem;
+	text-decoration: none;
+	transition:
+		background 0.2s,
+		border-color 0.2s,
+		transform 0.2s var(--rc-ease);
+}
+
+.rc-btn:hover {
+	transform: translateY(-1px);
+}
+
+.rc-btn--primary {
+	background: var(--rc-copper);
+	color: #fff;
+	box-shadow: 0 10px 24px -12px rgb(168 86 47 / 0.6);
+}
+
+.rc-btn--primary:hover {
+	background: var(--rc-copper-hover);
+	color: #fff;
+}
+
+.rc-btn--glass {
+	border-color: var(--rc-border-strong);
+	background: var(--rc-surface);
+	color: var(--rc-text);
+}
+
+.rc-btn--glass:hover {
+	border-color: var(--rc-text-3);
+	color: var(--rc-text);
+}
+
+.rc-btn--ghost {
+	color: var(--rc-text-2);
+}
+
+.rc-btn--ghost:hover {
+	color: var(--rc-text);
+}
+
+.rc-hero__stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.75rem;
+	list-style: none;
+	margin: 2rem 0 0;
+	padding: 0;
+	font-size: 0.92rem;
+	color: var(--rc-text-3);
+}
+
+.rc-hero__stats li {
+	margin: 0;
+}
+
+.rc-hero__stats strong {
+	color: var(--rc-text);
+	font-weight: 700;
+}
+
+/* ---------- Sections ---------- */
+
+.rc-home {
+	font-family: var(--rc-font);
+	color: var(--rc-text);
+}
+
+.rc-home a {
+	text-decoration: none;
+}
+
+.rc-home ul,
+.rc-home ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.rc-section {
+	padding-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.rc-section__head {
+	margin-bottom: 1.75rem;
+}
+
+.rc-home h2 {
+	margin: 0;
+	font-family: var(--rc-font-display);
+	font-weight: 400;
+	font-size: clamp(1.6rem, 3vw, 2.1rem);
+	line-height: 1.2;
+	letter-spacing: -0.025em;
+	color: var(--rc-text);
+}
+
+.rc-home h3 {
+	margin: 0;
+	color: var(--rc-text);
+}
+
+.rc-section__head p {
+	margin: 0.4rem 0 0;
+	color: var(--rc-text-3);
+}
+
+/* Shared card behaviour: neutral surface, Copper border only on hover. */
+.rc-step,
+.rc-product,
+.rc-feature {
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface);
+	transition:
+		transform 0.25s var(--rc-ease),
+		border-color 0.25s,
+		box-shadow 0.25s;
+}
+
+.rc-step:hover,
+.rc-product:hover,
+.rc-feature:hover {
+	transform: translateY(-2px);
+	border-color: color-mix(in srgb, var(--rc-accent) 60%, var(--rc-border));
+	box-shadow: var(--rc-shadow-lg);
+}
+
+/* Start here: numbered step cards. */
+.rc-steps {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+	gap: 1rem;
+}
+
+.rc-step {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	height: 100%;
+	padding: 1.35rem 1.35rem 1.25rem;
+	border-radius: 16px;
+}
+
+.rc-step__top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.6rem;
+}
+
+.rc-step__icon,
+.rc-feature__icon {
+	display: grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 11px;
+	background: var(--rc-accent-soft);
+	color: var(--rc-accent);
+	transition:
+		background 0.2s,
+		color 0.2s;
+}
+
+.rc-step:hover .rc-step__icon,
+.rc-feature:hover .rc-feature__icon {
+	background: var(--rc-copper);
+	color: #fff;
+}
+
+.rc-step__num {
+	font-family: var(--rc-font-display);
+	font-size: 0.95rem;
+	color: var(--rc-text-3);
+	letter-spacing: 0.02em;
+}
+
+.rc-step__title,
+.rc-feature__title {
+	color: var(--rc-text);
+	font-weight: 700;
+	font-size: 1.05rem;
+	line-height: 1.35;
+}
+
+.rc-step__text,
+.rc-feature__text {
+	color: var(--rc-text-2);
+	font-size: 0.9rem;
+	line-height: 1.55;
+}
+
+.rc-step__go {
+	margin-top: auto;
+	padding-top: 0.5rem;
+	color: var(--rc-text-3);
+	transition: color 0.2s;
+}
+
+.rc-step:hover .rc-step__go {
+	color: var(--rc-link);
+}
+
+.rc-step__go svg {
+	transition: transform 0.2s var(--rc-ease);
+}
+
+.rc-step:hover .rc-step__go svg {
+	transform: translateX(4px);
+}
+
+.rc-popular {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem 0.9rem;
+	margin-top: 1.25rem;
+}
+
+.rc-popular__label {
+	color: var(--rc-text-3);
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.rc-popular ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+}
+
+.rc-popular a {
+	display: inline-flex;
+	padding: 0.35rem 0.8rem;
+	border-radius: 999px;
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface-2);
+	color: var(--rc-text-2);
+	font-size: 0.85rem;
+	font-weight: 600;
+	transition:
+		border-color 0.15s,
+		color 0.15s;
+}
+
+.rc-popular a:hover {
+	border-color: var(--rc-accent);
+	color: var(--rc-text);
+}
+
+/* Drivers: gradient-banner cards, whole card clickable. Same card as the
+   rConfig docs product cards, with the driver name in place of a logo. */
+.rc-products {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+	gap: 1.25rem;
+}
+
+.rc-product {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 20px;
+	padding: 0 1.75rem 1.75rem;
+}
+
+/* Every driver card carries the Sim Copper gradient (brand guidelines,
+   product family). Light uses the gradient at 0% black; dark puts it under a
+   60% black overlay (brand rule). */
+.rc-product {
+	--p-gradient: var(--rc-copper-gradient);
+	--p-accent: var(--rc-accent);
+	--p-link: var(--rc-link);
+}
+
+.rc-product:hover {
+	border-color: color-mix(in srgb, var(--p-accent) 60%, var(--rc-border));
+}
+
+.rc-product__brand {
+	position: relative;
+	isolation: isolate;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 0.3rem;
+	height: 96px;
+	margin: 0 -1.75rem 1.5rem !important;
+	padding: 0 1.75rem;
+	background: var(--p-gradient);
+}
+
+:root[data-theme="dark"] .rc-product__brand {
+	background:
+		linear-gradient(rgb(0 0 0 / 0.6), rgb(0 0 0 / 0.6)),
+		var(--p-gradient);
+}
+
+/* Network grid texture, as on the hero. */
+.rc-product__brand::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background-image:
+		linear-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px),
+		linear-gradient(90deg, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+	background-size: 24px 24px;
+	mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+	-webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 100%);
+}
+
+.rc-product__link {
+	color: #fff;
+	font-family: var(--rc-font-display);
+	font-size: 1.45rem;
+	font-weight: 400;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+}
+
+.rc-product__link:hover {
+	color: #fff;
+}
+
+/* Manifest template name, kept on the dark end of the gradient for contrast. */
+.rc-product__tag {
+	padding: 0.1rem 0.45rem;
+	border-radius: 6px;
+	background: rgb(0 0 0 / 0.2);
+	color: rgb(255 255 255 / 0.88);
+	font-family: var(--sl-font-mono, ui-monospace, monospace);
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+/* Whole card is clickable. */
+.rc-product__link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+}
+
+.rc-product > p {
+	margin: 0 0 1.1rem;
+	color: var(--rc-text-2);
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+.rc-product__points {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-bottom: 1.5rem !important;
+}
+
+.rc-product__points li {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.3rem 0.7rem 0.3rem 0.55rem;
+	border-radius: 999px;
+	border: 1px solid var(--rc-border);
+	background: var(--rc-surface-2);
+	color: var(--rc-text-2);
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+
+.rc-product__points svg {
+	color: var(--p-accent);
+}
+
+.rc-product__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin-top: auto;
+	color: var(--p-link);
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+
+.rc-product__cta svg {
+	transition: transform 0.2s var(--rc-ease);
+}
+
+.rc-product:hover .rc-product__cta svg {
+	transform: translateX(4px);
+}
+
+.rc-product__cta:hover {
+	color: var(--p-link);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* What's inside: feature tiles. */
+.rc-features {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+	gap: 1rem;
+}
+
+.rc-feature {
+	display: flex;
+	flex-direction: column;
+	gap: 0.45rem;
+	height: 100%;
+	padding: 1.25rem;
+	border-radius: 14px;
+}
+
+.rc-feature__icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	margin-bottom: 0.35rem;
+}
+
+/* rConfig family: the rConfig docs' upgrade cards. */
+.rc-upgrade {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+	gap: 1rem;
+}
+
+.rc-upgrade__card {
+	display: flex;
+	flex-direction: column;
+	padding: 1.5rem;
+	border: 1px solid var(--rc-border);
+	border-radius: 16px;
+	background: var(--rc-surface-2);
+}
+
+.rc-upgrade__tag {
+	align-self: flex-start;
+	margin-bottom: 0.85rem;
+	padding: 0.2rem 0.6rem;
+	border-radius: 7px;
+	background: var(--rc-surface);
+	border: 1px solid var(--rc-border-strong);
+	color: var(--rc-text-2);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.rc-upgrade__card h3 {
+	font-family: var(--rc-font-display);
+	font-weight: 400;
+	font-size: 1.3rem;
+	letter-spacing: -0.015em;
+}
+
+.rc-upgrade__card p {
+	margin: 0.4rem 0 1.1rem;
+	color: var(--rc-text-2);
+	font-size: 0.93rem;
+}
+
+.rc-upgrade__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+	margin-top: auto;
+}
+
+.rc-upgrade__links a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	color: var(--rc-text-2);
+	font-weight: 600;
+	font-size: 0.92rem;
+}
+
+.rc-upgrade__links a:hover,
+.rc-upgrade__links .rc-link-strong {
+	color: var(--rc-link);
+}
+
+/* Closing call to action: a neutral panel with the same soft glow as the hero. */
+.rc-band {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	padding: clamp(1.75rem, 4vw, 2.75rem);
+	border: 1px solid var(--rc-border);
+	border-radius: 20px;
+	background:
+		radial-gradient(50% 120% at 100% 0%, var(--rc-glow), transparent 70%),
+		var(--rc-surface);
+}
+
+.rc-home .rc-band h2 {
+	font-size: clamp(1.5rem, 2.6vw, 1.85rem);
+}
+
+.rc-band p {
+	margin: 0.4rem 0 0;
+	color: var(--rc-text-2);
+}
+
+.rc-band__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+}
+
+.rc-band__links a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.7rem 1.05rem;
+	border: 1px solid var(--rc-border-strong);
+	border-radius: 11px;
+	background: var(--rc-surface-2);
+	color: var(--rc-text);
+	font-weight: 600;
+	font-size: 0.92rem;
+	transition: border-color 0.15s;
+}
+
+.rc-band__links a:hover {
+	border-color: var(--rc-text-3);
+	color: var(--rc-text);
+}
+
+.rc-band__links .rc-band__primary {
+	border-color: transparent;
+	background: var(--rc-copper);
+	color: #fff;
+}
+
+.rc-band__links .rc-band__primary:hover {
+	border-color: transparent;
+	background: var(--rc-copper-hover);
+	color: #fff;
+}
+
+.rc-legal {
+	margin: 2.5rem 0 1rem !important;
+	color: var(--rc-text-3);
+	font-size: 0.82rem;
+	text-align: center;
+}
+
+/* ---------- Header (homepage only, see Header.astro) ---------- */
+
+/* Same bar as the rConfig docs homepage: 64px, translucent with blur, content
+   centred at 1480px. The site-wide Copper hairline (custom.css) is drawn as a
+   background layer here, so the border-image does not also colour the bottom
+   border. */
+[data-has-hero] {
+	--sl-nav-height: 64px;
+}
+
+[data-has-hero] .page > .header {
+	padding: 0;
+	border-top: 0;
+	border-image: none;
+	background:
+		linear-gradient(90deg, #8c4220, #cc7a5c, #f2c6a2) top / 100% 3px no-repeat,
+		color-mix(in srgb, var(--rc-bg) 82%, transparent);
+	backdrop-filter: saturate(160%) blur(14px);
+	-webkit-backdrop-filter: saturate(160%) blur(14px);
+	border-bottom: 1px solid var(--rc-border);
+}
+
+.rc-header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	height: 100%;
+	max-width: 1480px;
+	margin: 0 auto;
+	padding: 0 1.25rem;
+	font-family: var(--rc-font);
+}
+
+.rc-brand {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	flex-shrink: 0;
+	color: var(--rc-text);
+	text-decoration: none;
+}
+
+.rc-brand__logo {
+	display: block;
+	width: auto;
+	height: 30px;
+}
+
+:root[data-theme="dark"] .rc-brand__logo--light,
+:root:not([data-theme="dark"]) .rc-brand__logo--dark {
+	display: none;
+}
+
+.rc-brand__divider {
+	width: 1px;
+	height: 22px;
+	background: var(--rc-border-strong);
+}
+
+.rc-brand__label {
+	font-family: var(--rc-font-display);
+	font-size: 0.95rem;
+	letter-spacing: -0.01em;
+	white-space: nowrap;
+}
+
+/* Starlight's search button, restyled as the rConfig docs search trigger. */
+.rc-header__search {
+	display: flex;
+	margin-left: auto;
+}
+
+.rc-header button[data-open-modal] {
+	gap: 0.6rem;
+	width: min(360px, 34vw);
+	max-width: none;
+	height: 40px;
+	padding: 0 0.6rem 0 0.85rem;
+	border: 1px solid var(--rc-border);
+	border-radius: 10px;
+	background: var(--rc-surface-2);
+	color: var(--rc-text-3);
+	font-family: inherit;
+	font-size: 0.9rem;
+	transition:
+		border-color 0.15s,
+		color 0.15s;
+}
+
+.rc-header button[data-open-modal]:hover {
+	border-color: var(--rc-border-strong);
+	color: var(--rc-text-2);
+}
+
+.rc-header button[data-open-modal] > kbd {
+	gap: 0.15rem;
+	padding: 0.1rem 0.4rem;
+	border: 1px solid var(--rc-border);
+	border-radius: 6px;
+	background: var(--rc-surface);
+	color: var(--rc-text-3);
+	font-family: inherit;
+	font-size: 0.72rem;
+	font-weight: 600;
+}
+
+.rc-header button[data-open-modal] > kbd kbd {
+	padding: 0;
+	border: 0;
+	background: none;
+	font: inherit;
+}
+
+.rc-header__links {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.rc-header__link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	padding: 0.45rem 0.75rem;
+	border-radius: 9px;
+	color: var(--rc-text-2);
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.rc-header__link-short {
+	display: none;
+}
+
+@media (max-width: 50rem) {
+	.rc-header__link-short {
+		display: inline;
+	}
+}
+
+.rc-header__link:hover {
+	background: var(--rc-surface-2);
+	color: var(--rc-text);
+}
+
+.rc-icon-btn {
+	display: inline-grid;
+	place-items: center;
+	width: 38px;
+	height: 38px;
+	border: 0;
+	border-radius: 9px;
+	background: transparent;
+	color: var(--rc-text-2);
+	cursor: pointer;
+}
+
+.rc-icon-btn:hover {
+	background: var(--rc-surface-2);
+	color: var(--rc-text);
+}
+
+:root[data-theme="dark"] .rc-theme-icon--light,
+:root:not([data-theme="dark"]) .rc-theme-icon--dark {
+	display: none;
+}
+
+@media (max-width: 50rem) {
+	.rc-brand__divider,
+	.rc-brand__label,
+	.rc-header__link-long {
+		display: none;
+	}
+
+	.rc-header button[data-open-modal] {
+		width: 40px;
+		padding: 0;
+		justify-content: center;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rc-step,
+	.rc-product,
+	.rc-feature,
+	.rc-btn {
+		transition: none;
+	}
+}

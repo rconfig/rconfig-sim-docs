@@ -29,9 +29,6 @@ header.header {
 ::selection {
   background: color-mix(in srgb, var(--sim-copper-2) 35%, transparent);
 }
-:root[data-theme="dark"] .hero img {
-  filter: drop-shadow(0 12px 40px rgba(204, 122, 92, 0.28));
-}
 
 /* Target the first h1#_top that's NOT in the hero section */
 h1#_top:not([data-page-title]) {

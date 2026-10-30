@@ -171,6 +171,9 @@ export default defineConfig({
 			head: buildHeadTags(!isDevServer),
 			components: {
 				SkipLink: "./src/components/starlight/SkipLink.astro",
+				Hero: "./src/components/starlight/Hero.astro",
+				// Homepage only: header laid out like the rConfig docs homepage. Other pages render the default.
+				Header: "./src/components/starlight/Header.astro",
 				Footer: "./src/components/starlight/Footer.astro",
 			},
 			sidebar: sidebarData,

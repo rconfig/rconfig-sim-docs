@@ -1,0 +1,85 @@
+---
+/**
+ * Override of Starlight's Hero, used only by the homepage (index.mdx).
+ *
+ * Same layout as the rConfig docs homepage hero, on the neutral page colour
+ * with a soft Copper glow, a network grid texture, the Sim hex as a watermark,
+ * Sora headline and a search box that opens Starlight's own search dialog.
+ * Title, tagline and actions still come from the page's `hero` frontmatter.
+ */
+import "@/styles/home.css";
+import { getCollection } from "astro:content";
+import DraftContentNotice from "virtual:starlight/components/DraftContentNotice";
+import Icon from "@/components/Icon.astro";
+
+const PAGE_TITLE_ID = "_top";
+
+// Starlight action variant -> hero button style.
+const buttonStyle = { primary: "primary", secondary: "glass", minimal: "ghost" } as const;
+
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline, actions = [] } = data.hero || {};
+
+const docs = await getCollection("docs");
+---
+
+<section class="rc-hero">
+	<img class="rc-hero__mark rc-hero__mark--dark" src="/images/sim-icon-white.svg" alt="" width="389" height="389" />
+	<img class="rc-hero__mark rc-hero__mark--light" src="/images/sim-icon-copper.svg" alt="" width="389" height="389" />
+	<div class="rc-hero__inner">
+		<a href="/contributing/changelog/" class="rc-hero__eyebrow">
+			<span class="rc-hero__eyebrow-dot" aria-hidden="true"></span>
+			What's new in rConfig-sim
+			<Icon name="arrowRight" size={14} />
+		</a>
+		<h1 id={PAGE_TITLE_ID} data-page-title set:html={title} />
+		{data.draft && <DraftContentNotice />}
+		{tagline && <p class="rc-hero__lead" set:html={tagline} />}
+
+		<button type="button" class="rc-hero__search" data-rc-open-search>
+			<Icon name="search" size={20} />
+			<span>Search the documentation</span>
+			<kbd>Ctrl K</kbd>
+		</button>
+
+		{
+			actions.length > 0 && (
+				<div class="rc-hero__actions">
+					{actions.map(({ link: href, text, variant, attrs }) => {
+						const external = /^https?:/.test(href);
+						return (
+							<a
+								href={href}
+								class:list={["rc-btn", `rc-btn--${buttonStyle[variant]}`]}
+								{...(external ? { rel: "noopener" } : {})}
+								{...attrs}
+							>
+								{text}
+								<Icon name={external ? "arrowUpRight" : "arrowRight"} size={16} />
+							</a>
+						);
+					})}
+				</div>
+			)
+		}
+
+		<ul class="rc-hero__stats">
+			<li><strong>50,000+</strong> devices per host</li>
+			<li><strong>{docs.length}</strong> docs pages</li>
+			<li>Cisco, Juniper and TL1 optical</li>
+			<li>Open source, <strong>MIT</strong></li>
+		</ul>
+	</div>
+</section>
+
+<script>
+	// The hero search box opens Starlight's search dialog.
+	document.querySelectorAll("[data-rc-open-search]").forEach((btn) =>
+		btn.addEventListener("click", () => {
+			document.querySelector<HTMLButtonElement>("site-search button[data-open-modal]")?.click();
+		}),
+	);
+	if (/Mac|iPhone|iPad/.test(navigator.platform)) {
+		document.querySelectorAll(".rc-hero__search kbd").forEach((k) => (k.textContent = "⌘K"));
+	}
+</script>

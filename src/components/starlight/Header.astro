@@ -1,0 +1,65 @@
+---
+/**
+ * Override of Starlight's Header.
+ *
+ * The homepage (the only page with a `hero`) gets the same header as the
+ * rConfig docs homepage: a centred bar with the Sim logo, a divider and a
+ * section label, the search box on the right, a GitHub link and an icon theme
+ * toggle. Styled in src/styles/home.css. Every other page keeps Starlight's
+ * default header unchanged.
+ */
+import Default from "@astrojs/starlight/components/Header.astro";
+import Search from "virtual:starlight/components/Search";
+import Icon from "@/components/Icon.astro";
+// Strapline-free lockups, as the rConfig docs header uses.
+import logoLight from "@/assets/images/sim-logo-header-gradient.svg";
+import logoDark from "@/assets/images/sim-logo-header-white.svg";
+
+const isHome = Boolean(Astro.locals.starlightRoute.entry.data.hero);
+---
+
+{
+	isHome ? (
+		<div class="rc-header">
+			<a href="/" class="rc-brand" aria-label="rConfig-sim Documentation home">
+				<img src={logoLight.src} alt="" height="30" width="104" class="rc-brand__logo rc-brand__logo--light" />
+				<img src={logoDark.src} alt="" height="30" width="104" class="rc-brand__logo rc-brand__logo--dark" />
+				<span class="rc-brand__divider" aria-hidden="true" />
+				<span class="rc-brand__label">Documentation</span>
+			</a>
+
+			{/* Starlight renders <site-search> as display: contents, so a wrapper does the layout. */}
+			<div class="rc-header__search">
+				<Search />
+			</div>
+
+			<nav class="rc-header__links" aria-label="Site">
+				<a href="https://github.com/rconfig/rconfig-sim" class="rc-header__link" rel="noopener" title="rConfig-sim on GitHub">
+					<span class="rc-header__link-long">View on GitHub</span>
+					<span class="rc-header__link-short">GitHub</span>
+					<Icon name="arrowUpRight" size={15} />
+				</a>
+				<button type="button" class="rc-icon-btn" aria-label="Toggle light or dark theme" data-rc-theme-toggle>
+					<Icon name="sun" size={18} class="rc-theme-icon rc-theme-icon--light" />
+					<Icon name="moon" size={18} class="rc-theme-icon rc-theme-icon--dark" />
+				</button>
+			</nav>
+		</div>
+	) : (
+		<Default />
+	)
+}
+
+<script>
+	// Same behaviour as the rConfig docs toggle: flip the theme and remember it
+	// under Starlight's own key, so every page picks it up.
+	document.querySelectorAll("[data-rc-theme-toggle]").forEach((btn) =>
+		btn.addEventListener("click", () => {
+			const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+			document.documentElement.dataset.theme = next;
+			try {
+				localStorage.setItem("starlight-theme", next);
+			} catch {}
+		}),
+	);
+</script>

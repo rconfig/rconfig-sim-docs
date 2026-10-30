@@ -1,0 +1,295 @@
+---
+/**
+ * Body of the homepage (index.mdx), below the Hero override. Same layout as
+ * the rConfig docs homepage, in the Sim Copper brand. Wrapped in .not-content
+ * so Starlight's Markdown styles stay out of the way. Styled in
+ * src/styles/home.css.
+ */
+import "@/styles/home.css";
+import Icon from "@/components/Icon.astro";
+
+type IconName = Parameters<typeof Icon>[0]["name"];
+
+const start: { icon: IconName; title: string; text: string; href: string }[] = [
+	{
+		icon: "compass",
+		title: "What is rConfig-sim?",
+		text: "What the simulator does, how it is put together, and when to use it.",
+		href: "/getting-started/introduction/",
+	},
+	{
+		icon: "download",
+		title: "Install",
+		text: "Check the requirements, build from source and install under systemd.",
+		href: "/installation/prerequisites/",
+	},
+	{
+		icon: "layers",
+		title: "Generate configs",
+		text: "Render a fleet of realistic, deterministic device configs and its manifest.",
+		href: "/generating-configs/overview/",
+	},
+	{
+		icon: "server",
+		title: "Run the server",
+		text: "Start the listeners, SSH in and point your tooling at the fleet.",
+		href: "/running-server/overview/",
+	},
+];
+
+const popular = [
+	{ label: "Quickstart", href: "/getting-started/quickstart/" },
+	{ label: "CLI reference", href: "/reference/cli/" },
+	{ label: "Network setup", href: "/installation/network-setup/" },
+	{ label: "Load-test scenarios", href: "/examples/scenarios/" },
+	{ label: "Fault types", href: "/faults/fault-types/" },
+	{ label: "Metrics reference", href: "/metrics/reference/" },
+	{ label: "Manifest schema", href: "/reference/manifest-schema/" },
+	{ label: "Using with rConfig", href: "/examples/using-with-rconfig/" },
+];
+
+// Same card as the rConfig docs product cards, all on the Sim Copper gradient.
+const drivers = [
+	{
+		name: "Cisco IOS",
+		template: "cisco_ios",
+		text: "Classic Cisco IOS over SSH: show commands, enable mode, prefix matching and a realistic session flow.",
+		points: ["show running-config", "Enable mode", "Prefix matching"],
+		href: "/drivers/cisco-ios/",
+	},
+	{
+		name: "Juniper Junos",
+		template: "junos",
+		text: "A minimal Junos operational-mode CLI with a user@host prompt and Junos-style errors.",
+		points: ["show configuration", "Silent screen-length", "Junos errors"],
+		href: "/drivers/junos/",
+	},
+	{
+		name: "Ciena 6500",
+		template: "ciena_tl1",
+		text: "TL1 over SSH for the Ciena 6500 optical platform, with an in-band login gate.",
+		points: ["TL1 over SSH", "ACT-USER login", "RTRV-* verbs"],
+		href: "/drivers/ciena-tl1/",
+	},
+	{
+		name: "Cisco ONS 15454",
+		template: "cisco_ons_tl1",
+		text: "TL1 over SSH for the Cisco ONS 15454, with positional network map records.",
+		points: ["TL1 over SSH", "RTRV-MAP-NETWORK", "ENE terms"],
+		href: "/drivers/cisco-ons-tl1/",
+	},
+	{
+		name: "Infinera DTN-X",
+		template: "infinera_tl1",
+		text: "TL1 over SSH for the Infinera DTN-X, with paged responses and routed replies.",
+		points: ["TL1 over SSH", "Paged RTRV-TIDMAP", "Routed replies"],
+		href: "/drivers/infinera-tl1/",
+	},
+	{
+		name: "Your vendor",
+		template: "driver framework",
+		text: "Every personality is a pluggable driver, picked per device from the manifest. Add your own.",
+		points: ["Pluggable", "Per-device", "Go interface"],
+		href: "/drivers/writing-a-driver/",
+	},
+];
+
+const features: { icon: IconName; title: string; text: string; href: string }[] = [
+	{
+		icon: "terminal",
+		title: "Real SSH, not a mock",
+		text: "Every listener speaks real SSH. Clients log in, run commands and read bytes off the wire as they would from hardware.",
+		href: "/getting-started/concepts/",
+	},
+	{
+		icon: "gauge",
+		title: "Zero-copy at scale",
+		text: "Configs are memory-mapped and streamed straight to the channel, so one host holds tens of thousands of sessions.",
+		href: "/getting-started/concepts/",
+	},
+	{
+		icon: "layers",
+		title: "Deterministic configs",
+		text: "From 30 KB access switches to 128 MB cores. The same seed produces byte-identical output on every run.",
+		href: "/generating-configs/determinism/",
+	},
+	{
+		icon: "caution",
+		title: "Fault injection",
+		text: "Auth failures, mid-stream disconnects, slow responses and malformed output, to test how your tooling copes.",
+		href: "/faults/overview/",
+	},
+	{
+		icon: "sliders",
+		title: "Device profiles",
+		text: "Pin a hang, latency, refusal or disconnect to chosen devices, so the same devices misbehave every run.",
+		href: "/faults/device-profiles/",
+	},
+	{
+		icon: "wave",
+		title: "Prometheus metrics",
+		text: "Bounded-cardinality metrics and health endpoints, with Grafana recipes for watching a run.",
+		href: "/metrics/overview/",
+	},
+	{
+		icon: "clock",
+		title: "Response timing",
+		text: "Tune per-command delay and jitter so the fleet responds like real devices under load.",
+		href: "/running-server/timing/",
+	},
+	{
+		icon: "rocket",
+		title: "Built for test rigs",
+		text: "systemd-native, graceful drain, and a CLI treated as public API, ready to drive hard in CI or the lab.",
+		href: "/installation/system-install/",
+	},
+];
+---
+
+<div class="rc-home not-content">
+	<section class="rc-section" aria-labelledby="start-here">
+		<div class="rc-section__head">
+			<h2 id="start-here">Start here</h2>
+			<p>New to rConfig-sim? Four steps from install to a running simulated fleet.</p>
+		</div>
+		<ol class="rc-steps">
+			{
+				start.map((s, i) => (
+					<li>
+						<a href={s.href} class="rc-step">
+							<span class="rc-step__top">
+								<span class="rc-step__icon">
+									<Icon name={s.icon} size={20} />
+								</span>
+								<span class="rc-step__num">{String(i + 1).padStart(2, "0")}</span>
+							</span>
+							<span class="rc-step__title">{s.title}</span>
+							<span class="rc-step__text">{s.text}</span>
+							<span class="rc-step__go" aria-hidden="true">
+								<Icon name="arrowRight" size={16} />
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ol>
+		<div class="rc-popular">
+			<span class="rc-popular__label">Popular</span>
+			<ul>
+				{
+					popular.map((p) => (
+						<li>
+							<a href={p.href}>{p.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="rc-section" aria-labelledby="drivers">
+		<div class="rc-section__head">
+			<h2 id="drivers">Drivers and vendors</h2>
+			<p>Each device takes on a vendor personality, chosen per device in the manifest.</p>
+		</div>
+		<div class="rc-products">
+			{
+				drivers.map((d) => (
+					<article class="rc-product">
+						<h3 class="rc-product__brand">
+							<a href={d.href} class="rc-product__link">
+								{d.name}
+							</a>
+							<span class="rc-product__tag">{d.template}</span>
+						</h3>
+						<p>{d.text}</p>
+						<ul class="rc-product__points">
+							{d.points.map((pt) => (
+								<li>
+									<Icon name="check" size={14} />
+									{pt}
+								</li>
+							))}
+						</ul>
+						<a href={d.href} class="rc-product__cta">
+							{d.template === "driver framework" ? "Write a driver" : `${d.name} driver`}
+							<Icon name="arrowRight" size={16} />
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="rc-section" aria-labelledby="whats-inside">
+		<div class="rc-section__head">
+			<h2 id="whats-inside">What's inside</h2>
+			<p>The main capabilities, with a link into the docs for each.</p>
+		</div>
+		<ul class="rc-features">
+			{
+				features.map((f) => (
+					<li>
+						<a href={f.href} class="rc-feature">
+							<span class="rc-feature__icon">
+								<Icon name={f.icon} size={20} />
+							</span>
+							<span class="rc-feature__title">{f.title}</span>
+							<span class="rc-feature__text">{f.text}</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
+	<section class="rc-section" aria-labelledby="rconfig-family">
+		<div class="rc-section__head">
+			<h2 id="rconfig-family">Part of the rConfig family</h2>
+			<p>Built by the rConfig team to load-test rConfig, and open to any SSH-based tooling.</p>
+		</div>
+		<div class="rc-upgrade">
+			<article class="rc-upgrade__card">
+				<span class="rc-upgrade__tag">rConfig</span>
+				<h3>Load-test rConfig</h3>
+				<p>Point rConfig at a simulated fleet to test backups, diffs and compliance at scale.</p>
+				<div class="rc-upgrade__links">
+					<a href="/examples/using-with-rconfig/" class="rc-link-strong">
+						Using rConfig-sim with rConfig <Icon name="arrowRight" size={16} />
+					</a>
+					<a href="https://docs.rconfig.com" rel="noopener">
+						rConfig documentation <Icon name="arrowUpRight" size={15} />
+					</a>
+				</div>
+			</article>
+			<article class="rc-upgrade__card">
+				<span class="rc-upgrade__tag">Open source</span>
+				<h3>Contribute to rConfig-sim</h3>
+				<p>MIT licensed and written in Go. Issues, fixes and new drivers are welcome.</p>
+				<div class="rc-upgrade__links">
+					<a href="/contributing/dev-setup/" class="rc-link-strong">
+						Development setup <Icon name="arrowRight" size={16} />
+					</a>
+					<a href="https://github.com/rconfig/rconfig-sim" rel="noopener">
+						GitHub repository <Icon name="arrowUpRight" size={15} />
+					</a>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="rc-section">
+		<div class="rc-band">
+			<div>
+				<h2>Ready to simulate a fleet?</h2>
+				<p>Run 100 devices on loopback in five minutes, then scale to 50,000.</p>
+			</div>
+			<div class="rc-band__links">
+				<a href="https://www.rconfig.com" rel="noopener">rconfig.com <Icon name="arrowUpRight" size={16} /></a>
+				<a href="https://github.com/rconfig/rconfig-sim" rel="noopener">GitHub <Icon name="arrowUpRight" size={16} /></a>
+				<a href="/getting-started/quickstart/" class="rc-band__primary">Start the quickstart <Icon name="arrowRight" size={16} /></a>
+			</div>
+		</div>
+		<p class="rc-legal">© 2026 rConfig. rConfig-sim is open source under the MIT licence.</p>
+	</section>
+</div>

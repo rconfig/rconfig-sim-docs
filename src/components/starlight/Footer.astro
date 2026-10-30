@@ -1,5 +1,9 @@
 ---
 import Default from "@astrojs/starlight/components/Footer.astro";
+
+// The homepage carries these links in its own "Part of the rConfig family"
+// section and closing band (src/components/home/Home.astro).
+const isHome = Boolean(Astro.locals.starlightRoute.entry.data.hero);
 ---
 
 {/* Default Starlight footer (prev/next nav, edit link, last-updated). */}
@@ -9,6 +13,7 @@ import Default from "@astrojs/starlight/components/Footer.astro";
     by the rConfig team; these point to the separate product and documentation
     properties. Kept descriptive and topical so they reinforce that rConfig-sim (a
     simulator) and rConfig (the NCM platform) are distinct. */}
+{!isHome && (
 <footer class="rcfg-family">
 	<p class="rcfg-family__label">Part of the rConfig family</p>
 	<ul class="rcfg-family__links">
@@ -18,6 +23,7 @@ import Default from "@astrojs/starlight/components/Footer.astro";
 		<li><a href="https://github.com/rconfig/rconfig-sim" rel="noopener">rcfg-sim on GitHub</a></li>
 	</ul>
 </footer>
+)}
 
 <style>
 	.rcfg-family {
