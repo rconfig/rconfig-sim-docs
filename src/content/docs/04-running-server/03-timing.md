@@ -38,6 +38,28 @@ command, the base delay is multiplied by a random factor of **10–50×**, cappe
 seconds. To keep the multiplier observable even when the configured delay is `0`, a 10 ms
 floor is applied before multiplying. See [Fault injection](/faults/overview/).
 
+## Per-device latency
+
+The delay flags apply to the whole fleet. To make specific devices slow, give them a
+`latency:<min>-<max>` [device profile](/faults/device-profiles/), which replaces the global
+min/max for those devices only:
+
+```bash
+--device-profiles "latency:1s-3s@10%"
+```
+
+## Session cap
+
+Every session is closed after `--max-session` (default `5m`), however long the client keeps
+it open. A device with a `hang` profile has the cap extended by its hang. Slow devices do
+not, so when a whole session on a slow device can run past 5 minutes (for example a large
+config at high latency), raise the cap, or the simulator ends the session rather than the
+client under test:
+
+```bash
+--max-session 15m
+```
+
 ## Observing latency
 
 Per-command latency (including any delay and fault multiplier) is recorded in the

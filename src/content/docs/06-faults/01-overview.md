@@ -42,6 +42,13 @@ per-session RNG **seeded from the session ID plus a timestamp**. The result:
 - **Random across the fleet** — different sessions hit different faults, so aggregate
   behaviour is realistically varied.
 
+## Faults vs device profiles
+
+Faults are random: you can't say in advance which device will fail. When a test needs the
+*same* devices to misbehave on every run ("these 3 devices hang for an hour"), use
+[device profiles](/faults/device-profiles/) instead. They pin a `hang`, `latency`, `refuse`
+or `disconnect` behaviour to devices chosen by seed or named in the manifest.
+
 ## What gets measured
 
 Every fault activation increments
@@ -53,3 +60,4 @@ you expect and correlate them with your tool's error handling. See the
 
 - [Fault types](/faults/fault-types/) — exactly what each fault does
 - [Examples](/faults/examples/) — recipes for common test scenarios
+- [Device profiles](/faults/device-profiles/) — fixed misbehaviour on chosen devices

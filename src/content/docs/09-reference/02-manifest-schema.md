@@ -28,5 +28,9 @@ hostname,ip,port,vendor,template,username,password,enable_password,config_file,s
 | 8 | `enable_password` | string | Enable-mode password |
 | 9 | `config_file` | string | Absolute path to the `.cfg` this device serves |
 | 10 | `size_bucket` | string | The [model/bucket](/generating-configs/size-buckets/) generated |
+| 11 | `profile` | string, optional | A [device profile](/faults/device-profiles/) pinned to this device (e.g. `hang:7200s`, `latency:200-800ms`, `refuse`, `disconnect`). Empty → the device takes its profile, if any, from `--device-profiles`. An invalid value stops startup. |
+
+The generator writes the first 10 columns. The 11th, `profile`, is optional: add it by hand
+when you want to pin a device. Manifests without it load unchanged.
 
 See [Manifest format](/generating-configs/manifest/) for examples and hand-rolling guidance.

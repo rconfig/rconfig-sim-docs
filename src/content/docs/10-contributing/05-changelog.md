@@ -15,6 +15,16 @@ see [Scope & versioning](/contributing/scope/) for the policy behind the version
 
 ## Release history
 
+### Unreleased
+
+- **[Device profiles](/faults/device-profiles/)** — pin `hang:<duration>`,
+  `latency:<min>-<max>`, `refuse` or `disconnect` to chosen devices, so the same devices
+  misbehave on every run. New flags `--device-profiles` and `--profile-seed` (default `42`).
+- Optional 11th manifest column **`profile`** pins one device to one profile. Manifests
+  without it load unchanged.
+- **`--max-session`** (default `5m`) sets the session cap. A `hang` device has the cap
+  extended by its hang, so long hangs are no longer cut at 5 minutes.
+
 ### 0.0.3 — 2026-06-06
 
 - **Multi-vendor [driver framework](/drivers/overview/)** — the server selects a per-device

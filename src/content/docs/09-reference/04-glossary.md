@@ -21,6 +21,11 @@ produces byte-identical generator output across runs.
 command when the server runs with `--commands-root`. See
 [Command files](/running-server/command-files/).
 
+**Device profile** — a fixed misbehaviour (`hang`, `latency`, `refuse`, `disconnect`) pinned
+to specific devices, chosen by `--device-profiles` and `--profile-seed` or by the manifest
+`profile` column. Unlike [fault injection](#fault-injection), the same devices misbehave on
+every run. See [Device profiles](/faults/device-profiles/).
+
 **Driver** — a vendor personality (`cisco_ios`, `junos`, `ciena_tl1`, `infinera_tl1`, `cisco_ons_tl1`)
 that owns a device's interactive SSH loop. A non-empty manifest `template` naming no
 registered driver is a startup error. See [Drivers & vendors](/drivers/overview/).

@@ -30,7 +30,10 @@ The SSH server. One instance per IP.
 | `--response-delay-ms-max` | `500` | Maximum per-command response delay (ms) |
 | `--fault-rate` | `0.0` | Probability `[0,1]` an enabled fault fires per event |
 | `--fault-types` | `""` | Comma-separated faults: `auth_fail`, `disconnect_mid`, `slow_response`, `malformed` |
+| `--device-profiles` | `""` | Per-device behaviour for a share of the fleet, `profile@percent,...` (e.g. `hang:3600s@3%,latency:200-800ms@10%`; empty = off). See [Device profiles](/faults/device-profiles/) |
+| `--profile-seed` | `42` | Seed deciding which devices `--device-profiles` picks; same seed, same devices |
 | `--max-concurrent-sessions` | `5000` | Semaphore cap on concurrent sessions |
+| `--max-session` | `5m` | Longest a session may last before the simulator closes it; a `hang` profile adds its hang |
 | `--commands-root` | `""` | Directory of per-device command output files, `DIR/<hostname>/<slug>.txt` (empty = off). See [Command files](/running-server/command-files/) |
 | `--log-level` | `info` | `error` \| `warn` \| `info` \| `debug` |
 
@@ -57,4 +60,4 @@ The config generator. Run once per campaign.
 
 - [Manifest schema](/reference/manifest-schema/)
 - [Default paths](/reference/paths/)
-- [Size buckets](/generating-configs/size-buckets/) and [fault types](/faults/fault-types/)
+- [Size buckets](/generating-configs/size-buckets/), [fault types](/faults/fault-types/) and [device profiles](/faults/device-profiles/)

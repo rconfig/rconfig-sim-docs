@@ -69,6 +69,21 @@ Everything on, at a high rate — a stress test for end-to-end resilience.
   --fault-rate 0.2 --fault-types "auth_fail,disconnect_mid,slow_response,malformed"
 ```
 
+## The same devices hang on every run
+
+Random faults can't tell you *which* devices failed. To assert on specific devices, use
+[device profiles](/faults/device-profiles/): here 3% of the fleet hangs for an hour, and the
+same seed picks the same hostnames on every run.
+
+```bash
+./bin/rcfg-sim \
+  --listen-ip 127.0.0.1 --port-start 12000 --port-count 100 \
+  --manifest /tmp/rcfg-test/manifest.csv --host-key /tmp/rcfg-test/hostkey \
+  --device-profiles "hang:3600s@3%" --profile-seed 42
+```
+
+The startup log names the chosen devices in a `device profile active` line.
+
 ## Confirming faults fired
 
 After a run, check the counters:

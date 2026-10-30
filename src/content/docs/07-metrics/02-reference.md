@@ -29,7 +29,9 @@ These are the closed sets pre-registered at startup:
 
 - **`rcfgsim_sessions_total{result}`** — `ok`, `auth_fail`, `disconnect`, `error`
 - **`rcfgsim_auth_attempts_total{result}`** — `ok`, `fail`
-- **`rcfgsim_faults_injected_total{type}`** — `auth_fail`, `disconnect_mid`, `slow_response`, `malformed`
+- **`rcfgsim_faults_injected_total{type}`** — `auth_fail`, `disconnect_mid`, `slow_response`, `malformed`.
+  A `disconnect` [device profile](/faults/device-profiles/#metrics) also counts here as
+  `disconnect_mid`; a `refuse` profile counts as `rcfgsim_sessions_total{result="error"}`.
 - **`rcfgsim_command_duration_seconds{command}`** — the Cisco command set, pre-registered at zero:
   `CmdUnknown`, `CmdEmpty`, `CmdAmbiguous`, `CmdTerminalLength`, `CmdTerminalPager`,
   `CmdEnable`, `CmdShowVersion`, `CmdShowRunningConfig`, `CmdShowStartupConfig`,

@@ -31,6 +31,7 @@ hostname,ip,port,vendor,template,username,password,enable_password,config_file,s
 | `enable_password` | Enable-mode password |
 | `config_file` | Absolute path to the `.cfg` this device serves |
 | `size_bucket` | The [model/bucket](/generating-configs/size-buckets/) the device was generated from |
+| `profile` | *Optional 11th column.* A [device profile](/faults/device-profiles/) pinned to this device, e.g. `hang:7200s`. Not written by the generator |
 
 :::caution[Public API]
 The manifest header and column order are part of rConfig-sim's stable surface. The `template`
@@ -56,6 +57,11 @@ An empty `template` value falls back to the `cisco_ios` driver, so older manifes
 working unchanged. A non-empty value that names no registered driver stops the server at
 startup. The generator never writes `junos`; set it by hand for Junos devices, as the
 [mesh-campus scenario](/examples/mesh-campus/) does.
+
+To make one device misbehave the same way on every run, append the optional `profile` column
+(`...,size_bucket,profile`) and give that device a value such as `hang:7200s` or `refuse`.
+Rows with an empty value behave normally, or take a profile from `--device-profiles`. See
+[Device profiles](/faults/device-profiles/#pinning-a-profile-to-one-device).
 
 ## Next
 

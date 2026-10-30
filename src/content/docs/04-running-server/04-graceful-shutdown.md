@@ -38,6 +38,9 @@ Under systemd this is wired into the unit with a `SIGTERM` stop and a **45-secon
 window (`TimeoutStopSec=45s`, `KillMode=mixed`). That's enough for streaming sessions —
 including large `show running-config` transfers — to complete before the instance restarts.
 
+Sessions on a device with a `hang` [device profile](/faults/device-profiles/) do not hold up
+shutdown: the hang ends and the connection is closed as soon as shutdown starts.
+
 ```bash
 # A clean restart drains active sessions first
 sudo systemctl restart rcfg-sim@10.50.0.1.service
